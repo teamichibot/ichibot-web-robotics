@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Robot Contest Nasional — Universitas Brawijaya — Ichibot Robotics</title>
+  <title>Robot Contest Nasional — Universitas Brawijayaaaa — Ichibot Robotics</title>
   <meta name="description" content="Robot Contest Nasional — Universitas Brawijaya di Ichibot Robotics.">
-  
+
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/animations.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+
   <style>
     /* Specific styles for product detail page */
     .detail-hero {
@@ -18,14 +19,14 @@
       padding-bottom: 40px;
       border-bottom: 1px solid var(--glass-border-subtle);
     }
-    
+
     .detail-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 48px;
       margin-bottom: 64px;
     }
-    
+
     .detail-image-wrap {
       border-radius: var(--radius-card-lg);
       overflow: hidden;
@@ -34,50 +35,50 @@
       box-shadow: var(--shadow-card);
       position: relative;
     }
-    
+
     .detail-image-wrap img {
       width: 100%;
       height: auto;
       display: block;
       transition: transform var(--transition-slow);
     }
-    
+
     .detail-image-wrap:hover img {
       transform: scale(1.03);
     }
-    
+
     .detail-info {
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
-    
+
     .detail-title {
       font-size: clamp(2rem, 4vw, 3rem);
       margin-bottom: 16px;
       color: var(--text-primary);
     }
-    
+
     .detail-price-wrap {
       display: flex;
       align-items: center;
       gap: 16px;
       margin-bottom: 24px;
     }
-    
+
     .detail-price {
       font-family: var(--font-display);
       font-size: 2rem;
       font-weight: 700;
       color: var(--accent-red-light);
     }
-    
+
     .detail-price-coret {
       font-size: 1.2rem;
       color: var(--text-muted);
       text-decoration: line-through;
     }
-    
+
     .detail-desc-title {
       font-family: var(--font-display);
       font-size: 1.25rem;
@@ -85,31 +86,31 @@
       margin-bottom: 12px;
       font-weight: 600;
     }
-    
+
     .detail-desc-text {
       color: var(--text-secondary);
       line-height: 1.7;
       margin-bottom: 32px;
     }
-    
+
     .spec-section {
       padding: 48px 0;
       border-top: 1px solid var(--glass-border);
     }
-    
+
     .spec-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 32px;
     }
-    
+
     .spec-list {
       list-style: none;
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
-    
+
     .spec-list li {
       display: flex;
       align-items: flex-start;
@@ -117,7 +118,7 @@
       color: var(--text-primary);
       font-size: 0.95rem;
     }
-    
+
     .spec-list li::before {
       content: '\f00c';
       font-family: 'Font Awesome 6 Free';
@@ -125,12 +126,13 @@
       color: var(--accent-red);
       margin-top: 2px;
     }
-    
+
     @media (max-width: 900px) {
       .detail-grid {
         grid-template-columns: 1fr;
         gap: 32px;
       }
+
       .spec-grid {
         grid-template-columns: 1fr;
         gap: 16px;
@@ -138,6 +140,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <!-- Navigation -->
@@ -147,18 +150,21 @@
         <div class="nav-logo-mark">I</div>
         <div class="nav-logo-text">ICHIBOT</div>
       </a>
-      
-            <div class="nav-links">
+
+      <div class="nav-links">
         <div class="nav-item">
-          <a href="#" style="cursor: pointer;">Produk & Layanan <i class="fa-solid fa-chevron-down" style="font-size: 0.8em; margin-left: 4px;"></i></a>
+          <a href="#" style="cursor: pointer;">Produk & Layanan <i class="fa-solid fa-chevron-down"
+              style="font-size: 0.8em; margin-left: 4px;"></i></a>
           <div class="nav-dropdown">
             <a href="products.html">Robot Edukasi</a>
             <a href="pelatihan.html">Pelatihan Robot</a>
-            <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20ingin%20info%20tentang%20Servis%20Robot" target="_blank">Servis Robot</a>
+            <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20ingin%20info%20tentang%20Servis%20Robot"
+              target="_blank">Servis Robot</a>
           </div>
         </div>
         <div class="nav-item">
-          <a href="#" style="cursor: pointer;">Komunitas <i class="fa-solid fa-chevron-down" style="font-size: 0.8em; margin-left: 4px;"></i></a>
+          <a href="#" style="cursor: pointer;">Komunitas <i class="fa-solid fa-chevron-down"
+              style="font-size: 0.8em; margin-left: 4px;"></i></a>
           <div class="nav-dropdown">
             <a href="blog.html">Blog & Berita</a>
             <a href="blog.html">Juara / Hall of Champions</a>
@@ -169,7 +175,7 @@
         <a href="events.html">Event Update</a>
         <a href="https://docs.ichibot.id" target="_blank">Docs</a>
       </div>
-<div class="nav-cta">
+      <div class="nav-cta">
         <a href="https://user.ichibot.id" class="btn btn-red btn-sm">
           <i class="fa-solid fa-user"></i> Login
         </a>
@@ -186,36 +192,41 @@
   <main>
     <section class="detail-hero">
       <div class="container reveal">
-        <a href="events.html" class="text-secondary" style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 24px; text-decoration: none; font-size: 0.9rem;">
+        <a href="events.html" class="text-secondary"
+          style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 24px; text-decoration: none; font-size: 0.9rem;">
           <i class="fa-solid fa-arrow-left"></i> Kembali ke Kalender Events
         </a>
-        
+
         <div class="detail-grid">
           <!-- Image -->
           <div class="detail-image-wrap reveal-d1">
-            <span class="badge badge-red" style="position: absolute; top: 16px; left: 16px; z-index: 2;">Kompetisi &middot; 05 Jul 2026</span>
+            <span class="badge badge-red" style="position: absolute; top: 16px; left: 16px; z-index: 2;">Kompetisi
+              &middot; 05 Jul 2026</span>
             <!-- REPLACE: Foto HD Ultimate 5 Max -->
-            <img src="https://placehold.co/800x800/111111/444444?text=Event+UB" alt="Robot Contest Nasional — Universitas Brawijaya">
+            <img src="https://placehold.co/800x800/111111/444444?text=Event+UB"
+              alt="Robot Contest Nasional — Universitas Brawijaya">
           </div>
-          
+
           <!-- Info -->
           <div class="detail-info reveal-d2">
             <h1 class="detail-title">Robot Contest Nasional — Universitas Brawijaya</h1>
-            
-            
+
+
             <div class="glass-card" style="padding: 24px; margin-bottom: 32px;">
               <h2 class="detail-desc-title">Deskripsi Singkat</h2>
               <p class="detail-desc-text">
-                Ajang kompetisi robot nasional bergengsi di Universitas Brawijaya dengan berbagai kategori perlombaan termasuk Line Follower dan Sumo.
+                Ajang kompetisi robot nasional bergengsi di Universitas Brawijaya dengan berbagai kategori perlombaan
+                termasuk Line Follower dan Sumo.
               </p>
             </div>
-            
+
             <div style="display: flex; gap: 16px;">
-              <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20ingin%20info%20mengenai%20Robot%20Contest%20Nasional%20—%20Universitas%20Brawijaya" target="_blank" class="btn btn-red btn-lg" style="flex: 1;">
+              <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20ingin%20info%20mengenai%20Robot%20Contest%20Nasional%20—%20Universitas%20Brawijaya"
+                target="_blank" class="btn btn-red btn-lg" style="flex: 1;">
                 <i class="fa-brands fa-whatsapp"></i> Daftar Kompetisi
               </a>
-              
-              
+
+
             </div>
           </div>
         </div>
@@ -228,7 +239,7 @@
         <div class="section-header">
           <h2 class="section-title" style="font-size: 1.8rem;">Detail / Informasi</h2>
         </div>
-        
+
         <div class="glass-card" style="padding: 32px 48px;">
           <div class="spec-grid">
             <ul class="spec-list">
@@ -252,9 +263,10 @@
       <div class="footer-grid">
         <div class="footer-col">
           <div class="footer-logo-text"><span>I</span>CHIBOT</div>
-          <p class="footer-tagline">Mendemokratisasi robotika kompetitif di Indonesia. Dari Yogyakarta ke seluruh dunia.</p>
+          <p class="footer-tagline">Mendemokratisasi robotika kompetitif di Indonesia. Dari Yogyakarta ke seluruh dunia.
+          </p>
         </div>
-        
+
         <div class="footer-col">
           <h4 class="footer-heading">Navigasi</h4>
           <div class="footer-links">
@@ -293,9 +305,10 @@
           </div>
         </div>
       </div>
-      
+
       <div class="footer-bottom">
-        <div class="footer-copy">&copy; <span class="current-year"></span> Ichibot Robotics. Yogyakarta, Indonesia.</div>
+        <div class="footer-copy">&copy; <span class="current-year"></span> Ichibot Robotics. Yogyakarta, Indonesia.
+        </div>
         <div class="footer-social">
           <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
           <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
@@ -308,4 +321,5 @@
 
   <script src="js/main.js"></script>
 </body>
+
 </html>
