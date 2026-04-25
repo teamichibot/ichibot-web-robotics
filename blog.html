@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog & Berita — Ichibot Robotics</title>
+  <meta name="description" content="Kumpulan pencapaian, sejarah ekspor ke 17 negara, dan ribuan kemenangan komunitas Ichibot Robotics.">
+  
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* Specific styles for achievements page */
+    .masonry-grid {
+      column-count: 3;
+      column-gap: 24px;
+    }
+    
+    @media (max-width: 1024px) {
+      .masonry-grid { column-count: 2; }
+    }
+    
+    @media (max-width: 640px) {
+      .masonry-grid { column-count: 1; }
+    }
+    
+    .achievement-card-wrap {
+      break-inside: avoid;
+      margin-bottom: 24px;
+      opacity: 0;
+    }
+    .achievement-card-wrap.animate-in {
+      animation: fadeInUp 0.45s var(--ease-out) forwards;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-mark">I</div>
+        <div class="nav-logo-text">ICHIBOT</div>
+      </a>
+      
+            <div class="nav-links">
+        <div class="nav-item">
+          <a href="#" style="cursor: pointer;">Produk & Layanan <i class="fa-solid fa-chevron-down" style="font-size: 0.8em; margin-left: 4px;"></i></a>
+          <div class="nav-dropdown">
+            <a href="products.html">Robot Edukasi</a>
+            <a href="pelatihan.html">Pelatihan Robot</a>
+            <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20ingin%20info%20tentang%20Servis%20Robot" target="_blank">Servis Robot</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="#" style="cursor: pointer;">Komunitas <i class="fa-solid fa-chevron-down" style="font-size: 0.8em; margin-left: 4px;"></i></a>
+          <div class="nav-dropdown">
+            <a href="blog.html">Blog & Berita</a>
+            <a href="blog.html">Juara / Hall of Champions</a>
+            <a href="community.html">Komunitas Ichibot</a>
+            <a href="about.html">Tentang Kami</a>
+          </div>
+        </div>
+        <a href="events.html">Event Update</a>
+        <a href="https://docs.ichibot.id" target="_blank">Docs</a>
+      </div>
+<div class="nav-cta">
+        <a href="https://user.ichibot.id" class="btn btn-red btn-sm">
+          <i class="fa-solid fa-user"></i> Login
+        </a>
+      </div>
+
+      <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+  <!-- Page Hero -->
+  <header class="page-hero">
+    <div class="container reveal">
+      <div class="section-label">Berita & Insight</div>
+      <h1>Blog Ichibot</h1>
+      <p class="text-secondary">Kumpulan postingan, tutorial, berita, dan pencapaian terbaru dari Ichibot Robotics.</p>
+    </div>
+  </header>
+
+  <!-- Achievements Content -->
+  <section class="section">
+    <div class="container">
+      
+      <!-- Filters -->
+      
+      
+      <div class="filter-tabs reveal reveal-d1">
+        <button class="filter-tab active" data-filter="semua">Semua</button>
+        <button class="filter-tab" data-filter="juara">Juara</button>
+        <button class="filter-tab" data-filter="berita">Berita</button>
+        <button class="filter-tab" data-filter="tutorial">Tutorial</button>
+        <button class="filter-tab" data-filter="ekspor">Ekspor</button>
+        <button class="filter-tab" data-filter="komunitas">Komunitas</button>
+        <button class="filter-tab" data-filter="milestone">Milestone</button>
+      </div>
+
+
+      
+      <!-- Masonry Grid -->
+      <div class="masonry-grid">
+
+        <!-- Tutorial 1 -->
+        <div class="achievement-card-wrap" data-category="berita">
+          <div class="glass-card achievement-card">
+            <div class="achievement-card-image">
+              <img src="https://placehold.co/800x600/111111/444444?text=Tutorial+PID" alt="Tutorial PID">
+            </div>
+            <div class="achievement-card-body">
+              <div class="achievement-card-meta">
+                <span class="badge badge-gray">#Tutorial</span>
+                <span class="achievement-card-date">10 Mei 2026</span>
+              </div>
+              <h3 class="achievement-card-title">Panduan Lengkap Tuning PID untuk Line Follower</h3>
+              <p class="achievement-card-desc">Pelajari dasar-dasar tuning Proporsional, Integral, dan Derivatif untuk membuat pergerakan robot lebih smooth.</p>
+              <a href="#" class="btn btn-ghost btn-sm" style="margin-top: 12px; width: 100%;">Baca Selengkapnya</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Berita 1 -->
+        <div class="achievement-card-wrap" data-category="berita">
+          <div class="glass-card achievement-card">
+            <div class="achievement-card-image">
+              <img src="https://placehold.co/800x450/111111/444444?text=Rilis+Chios+3" alt="Rilis Chios 3">
+            </div>
+            <div class="achievement-card-body">
+              <div class="achievement-card-meta">
+                <span class="badge badge-white">#Berita</span>
+                <span class="achievement-card-date">02 Apr 2026</span>
+              </div>
+              <h3 class="achievement-card-title">Rilis Update Firmware Chios v3.0</h3>
+              <p class="achievement-card-desc">Update terbaru untuk sistem operasi Chios membawa fitur kalibrasi otomatis dan antarmuka web yang diperbarui.</p>
+              <a href="#" class="btn btn-ghost btn-sm" style="margin-top: 12px; width: 100%;">Baca Selengkapnya</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 1 -->
+        <div class="achievement-card-wrap" data-category="pencapaian">
+          <div class="glass-card achievement-card">
+            <div class="achievement-card-image">
+              <img src="https://placehold.co/800x600/111111/444444?text=Juara+1+UB" alt="Juara 1 Line Follower UB">
+            </div>
+            <div class="achievement-card-body">
+              <div class="achievement-card-meta">
+                <span class="badge badge-red">#Juara</span>
+                <span class="achievement-card-date">Okt 2025</span>
+              </div>
+              <h3 class="achievement-card-title">🏆 Juara 1 Tingkat Nasional Universitas Brawijaya</h3>
+              <p class="achievement-card-desc">Tim komunitas Ichibot berhasil menyapu bersih podium pada kompetisi Line Follower tingkat nasional yang diadakan di Universitas Brawijaya, mengalahkan 120+ tim lainnya.</p>
+              <a href="achievement-ub.html" class="btn btn-ghost btn-sm" style="margin-top: 12px; width: 100%;">Baca Selengkapnya</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 -->
+        <div class="achievement-card-wrap" data-category="pencapaian">
+          <div class="glass-card achievement-card">
+            <div class="achievement-card-image">
+              <img src="https://placehold.co/800x450/111111/444444?text=Ekspor+ke+Jerman" alt="Ekspor Jerman">
+            </div>
+            <div class="achievement-card-body">
+              <div class="achievement-card-meta">
+                <span class="badge badge-white">#Ekspor</span>
+                <span class="achievement-card-date">Sep 2025</span>
+              </div>
+              <h3 class="achievement-card-title">🇩🇪 Ultimate 5 Max Tembus Pasar Jerman</h3>
+              <p class="achievement-card-desc">Pengiriman kloter pertama 20 unit Ultimate 5 Max ke universitas teknik di Jerman. Mereka memilih Ichibot karena performa sensor dan ketahanan di trek ekstrem.</p>
+              <a href="achievement-export-germany.html" class="btn btn-ghost btn-sm" style="margin-top: 12px; width: 100%;">Baca Selengkapnya</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 -->
+        <div class="achievement-card-wrap" data-category="pencapaian">
+          <div class="glass-card achievement-card">
+            <div class="achievement-card-image">
+              <img src="https://placehold.co/800x533/111111/444444?text=Kopdar+Nasional" alt="Kopdar Nasional">
+            </div>
+            <div class="achievement-card-body">
+              <div class="achievement-card-meta">
+                <span class="badge badge-gray">#Komunitas</span>
+                <span class="achievement-card-date">Agu 2025</span>
+              </div>
+              <h3 class="achievement-card-title">Kopdar Nasional 500+ Pengguna di Yogyakarta</h3>
+              <p class="achievement-card-desc">Berkumpul bersama saling berbagi ilmu setting robot, PID tuning, dan strategi lintasan untuk persiapan musim kompetisi akhir tahun.</p>
+              <a href="achievement-meetup.html" class="btn btn-ghost btn-sm" style="margin-top: 12px; width: 100%;">Baca Selengkapnya</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div class="achievement-card-wrap" data-category="pencapaian">
+          <div class="glass-card achievement-card">
+            <div class="achievement-card-image">
+              <img src="https://placehold.co/800x800/111111/444444?text=Ekspor+Jepang" alt="Ekspor Jepang">
+            </div>
+            <div class="achievement-card-body">
+              <div class="achievement-card-meta">
+                <span class="badge badge-white">#Ekspor</span>
+                <span class="achievement-card-date">Jul 2025</span>
+              </div>
+              <h3 class="achievement-card-title">🇯🇵 Robot Sumo 1 Kg Terjual ke Jepang</h3>
+              <p class="achievement-card-desc">Komunitas sumo robot di Jepang mengakui ketangguhan robot Sumo 1 Kg buatan Ichibot, dengan pemesanan batch pertama sebanyak 15 unit.</p>
+              <a href="achievement-japan.html" class="btn btn-ghost btn-sm" style="margin-top: 12px; width: 100%;">Baca Selengkapnya</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 5 -->
+        <div class="achievement-card-wrap" data-category="pencapaian">
+          <div class="glass-card achievement-card">
+            <div class="achievement-card-image">
+              <img src="https://placehold.co/800x400/111111/444444?text=10+Tahun+Ichibot" alt="10 Tahun Ichibot">
+            </div>
+            <div class="achievement-card-body">
+              <div class="achievement-card-meta">
+                <span class="badge badge-gray">#Milestone</span>
+                <span class="achievement-card-date">Jun 2025</span>
+              </div>
+              <h3 class="achievement-card-title">Perayaan 10 Tahun Ichibot Robotics</h3>
+              <p class="achievement-card-desc">Satu dekade berkarya! Dari sebuah lab kecil di Yogyakarta hingga kini memiliki ribuan pengguna di belasan negara.</p>
+              <a href="achievement-10years.html" class="btn btn-ghost btn-sm" style="margin-top: 12px; width: 100%;">Baca Selengkapnya</a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 6 -->
+        <div class="achievement-card-wrap" data-category="pencapaian">
+          <div class="glass-card achievement-card">
+            <div class="achievement-card-image">
+              <img src="https://placehold.co/800x600/111111/444444?text=Juara+Internasional+Malaysia" alt="Juara Malaysia">
+            </div>
+            <div class="achievement-card-body">
+              <div class="achievement-card-meta">
+                <span class="badge badge-red">#Juara</span>
+                <span class="achievement-card-date">Mei 2025</span>
+              </div>
+              <h3 class="achievement-card-title">🇲🇾 Juara Umum Line Follower UTM Malaysia</h3>
+              <p class="achievement-card-desc">Membawa pulang piala Juara Umum Internasional. Kombinasi Ultimate 5 Max dan strategi tuning PID yang sangat presisi menjadi kuncinya.</p>
+              <a href="achievement-utm.html" class="btn btn-ghost btn-sm" style="margin-top: 12px; width: 100%;">Baca Selengkapnya</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-logo-text"><span>I</span>CHIBOT</div>
+          <p class="footer-tagline">Mendemokratisasi robotika kompetitif di Indonesia. Dari Yogyakarta ke seluruh dunia.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Navigasi</h4>
+          <div class="footer-links">
+            <a href="index.html">Beranda</a>
+            <a href="products.html">Produk</a>
+            <a href="pelatihan.html">Pelatihan</a>
+            <a href="blog.html">Blog</a>
+            <a href="events.html">Events</a>
+            <a href="community.html">Komunitas</a>
+            <a href="about.html">Tentang Kami</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Kategori Produk</h4>
+          <div class="footer-links">
+            <a href="products.html">Line Follower</a>
+            <a href="products.html">Sumo</a>
+            <a href="products.html">Transporter</a>
+            <a href="products.html">MyRIO</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Official Store</h4>
+          <div class="footer-marketplaces">
+            <a href="#" class="marketplace-link" target="_blank">
+              <i class="fa-solid fa-bag-shopping"></i> Shopee
+            </a>
+            <a href="#" class="marketplace-link" target="_blank">
+              <i class="fa-solid fa-store"></i> Tokopedia
+            </a>
+            <a href="#" class="marketplace-link" target="_blank">
+              <i class="fa-brands fa-tiktok"></i> TikTok Shop
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <div class="footer-copy">&copy; <span class="current-year"></span> Ichibot Robotics. Yogyakarta, Indonesia.</div>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    (function () {
+      function animateCards(cards, filter) {
+        let idx = 0;
+        cards.forEach((card) => {
+          const match = filter === 'semua' || card.dataset.category === filter;
+          if (match) {
+            card.style.display = 'block';
+            card.classList.remove('animate-in');
+            void card.offsetWidth;
+            card.style.animationDelay = (idx * 0.06) + 's';
+            card.classList.add('animate-in');
+            idx++;
+          } else {
+            card.style.display = 'none';
+            card.classList.remove('animate-in');
+          }
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const tabs  = document.querySelectorAll('.filter-tab');
+        const cards = document.querySelectorAll('.achievement-card-wrap');
+
+        tabs.forEach(tab => {
+          tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            animateCards(cards, tab.dataset.filter);
+          });
+        });
+
+        animateCards(cards, 'semua');
+      });
+    })();
+  </script>
+</body>
+</html>

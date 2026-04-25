@@ -1,0 +1,154 @@
+/* =========================================================
+   ICHIBOT ROBOTICS — animations.css
+   Keyframes · Scroll triggers · Map arcs · Hero SVG
+   ========================================================= */
+
+/* ── Fade-in Up ─────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ── Hero load animations ───────────────────────────────── */
+.hero-label    { animation: fadeInUp 0.7s var(--ease-out) 0.1s both; }
+.hero-headline { animation: fadeInUp 0.7s var(--ease-out) 0.22s both; }
+.hero-sub      { animation: fadeInUp 0.7s var(--ease-out) 0.36s both; }
+.hero-ctas     { animation: fadeInUp 0.7s var(--ease-out) 0.50s both; }
+.hero-scroll   { animation: fadeInUp 0.7s var(--ease-out) 0.66s both; }
+
+/* ── Pulsing origin dot (Yogyakarta) ────────────────────── */
+@keyframes pulseOrigin {
+  0%   { r: 8; opacity: 1; }
+  60%  { r: 18; opacity: 0; }
+  100% { r: 8; opacity: 0; }
+}
+@keyframes pulseOriginCore {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.7; transform: scale(1.15); }
+}
+
+.map-origin-pulse {
+  animation: pulseOrigin 2.2s ease-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+.map-origin-core {
+  animation: pulseOriginCore 2.2s ease-in-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+/* ── Pulsing destination dots ───────────────────────────── */
+@keyframes pulseDest {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(1.5); }
+}
+.map-dest-dot {
+  opacity: 0;
+  animation: pulseDest 2.8s ease-in-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+.map-dest-dot.drawn { opacity: 0.85; }
+
+/* ── Arc draw-on ────────────────────────────────────────── */
+@keyframes arcDraw {
+  from { stroke-dashoffset: var(--arc-len, 600); }
+  to   { stroke-dashoffset: 0; }
+}
+.map-arc {
+  stroke-dasharray: var(--arc-len, 600);
+  stroke-dashoffset: var(--arc-len, 600);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+.map-arc.drawing {
+  opacity: 1;
+  animation: arcDraw 1.1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ── Hero SVG track animation ───────────────────────────── */
+@keyframes trackDraw {
+  from { stroke-dashoffset: 2400; }
+  to   { stroke-dashoffset: 0; }
+}
+@keyframes robotMove {
+  0%   { offset-distance: 0%; }
+  100% { offset-distance: 100%; }
+}
+.hero-track-path {
+  stroke-dasharray: 2400;
+  animation: trackDraw 3.5s ease-out 0.4s both;
+}
+.hero-robot-dot {
+  animation: fadeIn 0.3s ease 3.8s both;
+}
+
+/* ── Grain texture shift ────────────────────────────────── */
+@keyframes grainShift {
+  0%   { transform: translate(0,0); }
+  20%  { transform: translate(-2%,1%); }
+  40%  { transform: translate(1%,-2%); }
+  60%  { transform: translate(-1%,2%); }
+  80%  { transform: translate(2%,-1%); }
+  100% { transform: translate(0,0); }
+}
+body::before {
+  animation: grainShift 8s steps(1) infinite;
+}
+
+/* ── Counter number pop ─────────────────────────────────── */
+@keyframes counterPop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+.stat-value.popped {
+  animation: counterPop 0.4s var(--ease-out);
+}
+
+/* ── Card stagger on grid appear ────────────────────────── */
+.card-grid .glass-card:nth-child(1) { transition-delay: 0.06s; }
+.card-grid .glass-card:nth-child(2) { transition-delay: 0.12s; }
+.card-grid .glass-card:nth-child(3) { transition-delay: 0.18s; }
+.card-grid .glass-card:nth-child(4) { transition-delay: 0.24s; }
+.card-grid .glass-card:nth-child(5) { transition-delay: 0.30s; }
+.card-grid .glass-card:nth-child(6) { transition-delay: 0.36s; }
+
+/* ── Scroll indicator bounce ────────────────────────────── */
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(8px); }
+}
+.scroll-indicator { animation: scrollBounce 1.8s ease-in-out infinite; }
+
+/* ── Glow pulse on red elements ─────────────────────────── */
+@keyframes redGlowPulse {
+  0%, 100% { box-shadow: 0 0 12px rgba(220,30,30,0.3); }
+  50%       { box-shadow: 0 0 28px rgba(220,30,30,0.55); }
+}
+.glow-pulse { animation: redGlowPulse 2.5s ease-in-out infinite; }
+
+/* ── Why Ichibot pillar card reveal ─────────────────────── */
+@keyframes pillarReveal {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.pillar-card { opacity: 0; }
+.pillar-card.visible {
+  animation: pillarReveal 0.55s var(--ease-out) forwards;
+}
+.pillar-card:nth-child(1).visible { animation-delay: 0.05s; }
+.pillar-card:nth-child(2).visible { animation-delay: 0.13s; }
+.pillar-card:nth-child(3).visible { animation-delay: 0.21s; }
+.pillar-card:nth-child(4).visible { animation-delay: 0.29s; }

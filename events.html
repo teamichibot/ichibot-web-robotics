@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events — Ichibot Robotics</title>
+  <meta name="description" content="Kumpulan pencapaian, sejarah ekspor ke 17 negara, dan ribuan kemenangan komunitas Ichibot Robotics.">
+  
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* Specific styles for achievements page */
+    .masonry-grid {
+      column-count: 3;
+      column-gap: 24px;
+    }
+    
+    @media (max-width: 1024px) {
+      .masonry-grid { column-count: 2; }
+    }
+    
+    @media (max-width: 640px) {
+      .masonry-grid { column-count: 1; }
+    }
+    
+    .achievement-card-wrap {
+      break-inside: avoid;
+      margin-bottom: 24px;
+      opacity: 0;
+    }
+    .achievement-card-wrap.animate-in {
+      animation: fadeInUp 0.45s var(--ease-out) forwards;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-mark">I</div>
+        <div class="nav-logo-text">ICHIBOT</div>
+      </a>
+      
+            <div class="nav-links">
+        <div class="nav-item">
+          <a href="#" style="cursor: pointer;">Produk & Layanan <i class="fa-solid fa-chevron-down" style="font-size: 0.8em; margin-left: 4px;"></i></a>
+          <div class="nav-dropdown">
+            <a href="products.html">Robot Edukasi</a>
+            <a href="pelatihan.html">Pelatihan Robot</a>
+            <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20ingin%20info%20tentang%20Servis%20Robot" target="_blank">Servis Robot</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="#" style="cursor: pointer;">Komunitas <i class="fa-solid fa-chevron-down" style="font-size: 0.8em; margin-left: 4px;"></i></a>
+          <div class="nav-dropdown">
+            <a href="blog.html">Blog & Berita</a>
+            <a href="blog.html">Juara / Hall of Champions</a>
+            <a href="community.html">Komunitas Ichibot</a>
+            <a href="about.html">Tentang Kami</a>
+          </div>
+        </div>
+        <a href="events.html">Event Update</a>
+        <a href="https://docs.ichibot.id" target="_blank">Docs</a>
+      </div>
+<div class="nav-cta">
+        <a href="https://user.ichibot.id" class="btn btn-red btn-sm">
+          <i class="fa-solid fa-user"></i> Login
+        </a>
+      </div>
+
+      <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+  <!-- Page Hero -->
+  <header class="page-hero">
+    <div class="container reveal">
+      <div class="section-label">Kalender Kegiatan</div>
+      <h1>Events & Updates</h1>
+      <p class="text-secondary">Daftar kompetisi, workshop, dan update terbaru seputar dunia robotika.</p>
+    </div>
+  </header>
+
+  <!-- Achievements Content -->
+  <section class="section">
+    <div class="container">
+      
+      <!-- Filters -->
+
+      <div class="filter-tabs reveal reveal-d1">
+        <button class="filter-tab active" data-filter="semua">Semua</button>
+        <button class="filter-tab" data-filter="kompetisi">Kompetisi</button>
+        <button class="filter-tab" data-filter="workshop">Workshop</button>
+      </div>
+
+      
+      <!-- Masonry Grid -->
+      
+      <div class="masonry-grid">
+        <div class="achievement-card-wrap" data-category="kompetisi">
+          <div class="glass-card achievement-card">
+            <div class="achievement-card-image">
+              <img src="https://placehold.co/800x600/111111/444444?text=Event+ITS" alt="ITS Surabaya">
+            </div>
+            <div class="achievement-card-body">
+              <div class="achievement-card-meta">
+                <span class="badge badge-red">#Kompetisi</span>
+                <span class="achievement-card-date">14 Jun 2026</span>
+              </div>
+              <h3 class="achievement-card-title">Line Follower Contest — ITS Surabaya</h3>
+              <p class="achievement-card-desc">Kompetisi line follower tingkat nasional di Institut Teknologi Sepuluh Nopember (ITS) Surabaya.</p>
+              <a href="event-its.html" class="btn btn-ghost btn-sm" style="margin-top: 12px; width: 100%;">Baca Selengkapnya</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="achievement-card-wrap" data-category="workshop">
+          <div class="glass-card achievement-card">
+            <div class="achievement-card-image">
+              <img src="https://placehold.co/800x450/111111/444444?text=Workshop+PID" alt="Workshop PID">
+            </div>
+            <div class="achievement-card-body">
+              <div class="achievement-card-meta">
+                <span class="badge badge-white">#Workshop</span>
+                <span class="achievement-card-date">22 Jun 2026</span>
+              </div>
+              <h3 class="achievement-card-title">Workshop Tuning PID — Ichibot Yogyakarta</h3>
+              <p class="achievement-card-desc">Workshop eksklusif mempelajari cara tuning PID untuk line follower dan robot sumo.</p>
+              <a href="event-workshop-pid.html" class="btn btn-ghost btn-sm" style="margin-top: 12px; width: 100%;">Baca Selengkapnya</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="achievement-card-wrap" data-category="kompetisi">
+          <div class="glass-card achievement-card">
+            <div class="achievement-card-image">
+              <img src="https://placehold.co/800x533/111111/444444?text=Event+UB" alt="Robot Contest UB">
+            </div>
+            <div class="achievement-card-body">
+              <div class="achievement-card-meta">
+                <span class="badge badge-red">#Kompetisi</span>
+                <span class="achievement-card-date">05 Jul 2026</span>
+              </div>
+              <h3 class="achievement-card-title">Robot Contest Nasional — Universitas Brawijaya</h3>
+              <p class="achievement-card-desc">Ajang kompetisi robot nasional bergengsi di Universitas Brawijaya dengan berbagai kategori perlombaan.</p>
+              <a href="event-ub.html" class="btn btn-ghost btn-sm" style="margin-top: 12px; width: 100%;">Baca Selengkapnya</a>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-logo-text"><span>I</span>CHIBOT</div>
+          <p class="footer-tagline">Mendemokratisasi robotika kompetitif di Indonesia. Dari Yogyakarta ke seluruh dunia.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Navigasi</h4>
+          <div class="footer-links">
+            <a href="index.html">Beranda</a>
+            <a href="products.html">Produk</a>
+            <a href="pelatihan.html">Pelatihan</a>
+            <a href="blog.html">Blog</a>
+            <a href="events.html">Events</a>
+            <a href="community.html">Komunitas</a>
+            <a href="about.html">Tentang Kami</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Kategori Produk</h4>
+          <div class="footer-links">
+            <a href="products.html">Line Follower</a>
+            <a href="products.html">Sumo</a>
+            <a href="products.html">Transporter</a>
+            <a href="products.html">MyRIO</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Official Store</h4>
+          <div class="footer-marketplaces">
+            <a href="#" class="marketplace-link" target="_blank">
+              <i class="fa-solid fa-bag-shopping"></i> Shopee
+            </a>
+            <a href="#" class="marketplace-link" target="_blank">
+              <i class="fa-solid fa-store"></i> Tokopedia
+            </a>
+            <a href="#" class="marketplace-link" target="_blank">
+              <i class="fa-brands fa-tiktok"></i> TikTok Shop
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <div class="footer-copy">&copy; <span class="current-year"></span> Ichibot Robotics. Yogyakarta, Indonesia.</div>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    (function () {
+      function animateCards(cards, filter) {
+        let idx = 0;
+        cards.forEach((card) => {
+          const match = filter === 'semua' || card.dataset.category === filter;
+          if (match) {
+            card.style.display = 'block';
+            card.classList.remove('animate-in');
+            void card.offsetWidth;
+            card.style.animationDelay = (idx * 0.06) + 's';
+            card.classList.add('animate-in');
+            idx++;
+          } else {
+            card.style.display = 'none';
+            card.classList.remove('animate-in');
+          }
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const tabs  = document.querySelectorAll('.filter-tab');
+        const cards = document.querySelectorAll('.achievement-card-wrap');
+
+        tabs.forEach(tab => {
+          tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            animateCards(cards, tab.dataset.filter);
+          });
+        });
+
+        animateCards(cards, 'semua');
+      });
+    })();
+  </script>
+</body>
+</html>

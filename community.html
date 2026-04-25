@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Komunitas — Ichibot Robotics</title>
+  <meta name="description" content="Komunitas robotika kompetitif terbesar di Indonesia. Bergabunglah bersama 500+ juara pengguna Ichibot Robotics di seluruh dunia.">
+  
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    .champions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    
+    .submission-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    
+    @media (max-width: 900px) {
+      .submission-section {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-mark">I</div>
+        <div class="nav-logo-text">ICHIBOT</div>
+      </a>
+      
+            <div class="nav-links">
+        <div class="nav-item">
+          <a href="#" style="cursor: pointer;">Produk & Layanan <i class="fa-solid fa-chevron-down" style="font-size: 0.8em; margin-left: 4px;"></i></a>
+          <div class="nav-dropdown">
+            <a href="products.html">Robot Edukasi</a>
+            <a href="pelatihan.html">Pelatihan Robot</a>
+            <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20ingin%20info%20tentang%20Servis%20Robot" target="_blank">Servis Robot</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="#" style="cursor: pointer;">Komunitas <i class="fa-solid fa-chevron-down" style="font-size: 0.8em; margin-left: 4px;"></i></a>
+          <div class="nav-dropdown">
+            <a href="blog.html">Blog & Berita</a>
+            <a href="blog.html">Juara / Hall of Champions</a>
+            <a href="community.html">Komunitas Ichibot</a>
+            <a href="about.html">Tentang Kami</a>
+          </div>
+        </div>
+        <a href="events.html">Event Update</a>
+        <a href="https://docs.ichibot.id" target="_blank">Docs</a>
+      </div>
+<div class="nav-cta">
+        <a href="https://user.ichibot.id" class="btn btn-red btn-sm">
+          <i class="fa-solid fa-user"></i> Login
+        </a>
+      </div>
+
+      <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+  <!-- Page Hero -->
+  <header class="page-hero">
+    <div class="container reveal">
+      <div class="section-label">Komunitas Ichibot</div>
+      <h1>500+ Juara di Seluruh Dunia</h1>
+      <p class="text-secondary" style="max-width: 600px; margin: 20px auto 0;">Ichibot bukan sekadar robot — ini komunitas juara. Ekosistem para pemenang yang terus berinovasi dan mendominasi sirkuit kompetisi.</p>
+    </div>
+  </header>
+
+  <!-- Hall of Champions Section -->
+  <section class="section reveal">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Hall of Champions</h2>
+          <p class="section-subtitle">Tim-tim hebat yang mencetak sejarah bersama Ichibot.</p>
+        </div>
+      </div>
+      
+      <div class="champions-grid card-grid">
+        <div class="glass-card champion-card reveal reveal-d1">
+          <img src="https://placehold.co/200x200/111111/444444?text=Tim+A" alt="Tim A" class="champion-avatar">
+          <div>
+            <h3 class="champion-name">Tim AlphaBot</h3>
+            <p class="champion-team">Universitas Gadjah Mada</p>
+          </div>
+          <div class="champion-wins">🏆 12x Juara 1</div>
+        </div>
+        
+        <div class="glass-card champion-card reveal reveal-d2">
+          <img src="https://placehold.co/200x200/111111/444444?text=Tim+B" alt="Tim B" class="champion-avatar">
+          <div>
+            <h3 class="champion-name">Tim RoboTech</h3>
+            <p class="champion-team">Politeknik Negeri Malang</p>
+          </div>
+          <div class="champion-wins">🏆 8x Juara 1</div>
+        </div>
+
+        <div class="glass-card champion-card reveal reveal-d3">
+          <img src="https://placehold.co/200x200/111111/444444?text=Tim+C" alt="Tim C" class="champion-avatar">
+          <div>
+            <h3 class="champion-name">Tim Skuadron</h3>
+            <p class="champion-team">SMA N 1 Yogyakarta</p>
+          </div>
+          <div class="champion-wins">🏆 15x Podium</div>
+        </div>
+
+        <div class="glass-card champion-card reveal reveal-d4">
+          <img src="https://placehold.co/200x200/111111/444444?text=Tim+D" alt="Tim D" class="champion-avatar">
+          <div>
+            <h3 class="champion-name">Tim Electron</h3>
+            <p class="champion-team">UTM Malaysia</p>
+          </div>
+          <div class="champion-wins">🏆 Juara Internasional</div>
+        </div>
+
+        <div class="glass-card champion-card reveal reveal-d5">
+          <img src="https://placehold.co/200x200/111111/444444?text=Tim+E" alt="Tim E" class="champion-avatar">
+          <div>
+            <h3 class="champion-name">Tim Matrix</h3>
+            <p class="champion-team">Institut Teknologi Sepuluh Nopember</p>
+          </div>
+          <div class="champion-wins">🏆 5x Juara 1</div>
+        </div>
+
+        <div class="glass-card champion-card reveal reveal-d6">
+          <img src="https://placehold.co/200x200/111111/444444?text=Tim+F" alt="Tim F" class="champion-avatar">
+          <div>
+            <h3 class="champion-name">Tim Zenit</h3>
+            <p class="champion-team">Universitas Indonesia</p>
+          </div>
+          <div class="champion-wins">🏆 10x Podium</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Submission Form Section -->
+  <section class="section bg-secondary reveal">
+    <div class="container">
+      <div class="submission-section">
+        
+        <!-- Left Side: Copy -->
+        <div class="submission-copy">
+          <div class="section-label">Submit Pencapaian</div>
+          <h2 class="section-title">Bagikan Kemenanganmu</h2>
+          <p class="text-secondary" style="margin-bottom: 24px;">Apakah kamu baru saja memenangkan kompetisi bersama produk Ichibot? Beri tahu kami agar kami bisa merayakannya dan memasukkan profilmu ke dalam Hall of Champions!</p>
+          
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px;">
+            <li style="display: flex; gap: 12px; align-items: center;"><i class="fa-solid fa-check text-red"></i> Dapatkan merchandise eksklusif</li>
+            <li style="display: flex; gap: 12px; align-items: center;"><i class="fa-solid fa-check text-red"></i> Profil tim dipajang di website resmi</li>
+            <li style="display: flex; gap: 12px; align-items: center;"><i class="fa-solid fa-check text-red"></i> Menjadi bagian dari jaringan juara</li>
+          </ul>
+        </div>
+        
+        <!-- Right Side: Form -->
+        <div class="glass-card" style="padding: 32px; border-top: 4px solid var(--accent-red);">
+          <form id="submission-form">
+            <div class="form-group">
+              <label class="form-label" for="nama">Nama / Perwakilan Tim</label>
+              <input type="text" id="nama" class="form-input" placeholder="Misal: Budi Santoso" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="tim">Nama Tim & Sekolah/Kampus</label>
+              <input type="text" id="tim" class="form-input" placeholder="Misal: Tim AlphaBot - UGM" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="event">Nama Kompetisi</label>
+              <input type="text" id="event" class="form-input" placeholder="Misal: Line Follower Contest 2025" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="prestasi">Prestasi yang Diraih</label>
+              <input type="text" id="prestasi" class="form-input" placeholder="Misal: Juara 1" required>
+            </div>
+            <div class="form-group" style="margin-bottom: 24px;">
+              <label class="form-label" for="linkFoto">Link Foto Kemenangan</label>
+              <input type="url" id="linkFoto" class="form-input" placeholder="Link Google Drive / Instagram" required>
+            </div>
+            <button type="submit" class="btn btn-red" style="width: 100%;">
+              <i class="fa-brands fa-whatsapp"></i> Kirim via WhatsApp
+            </button>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  
+  <!-- Social Links Section -->
+  <section class="section reveal">
+    <div class="container">
+      <div class="section-header section-header--center">
+        <h2 class="section-title">Ikuti Perkembangan Komunitas</h2>
+        <p class="section-subtitle">Bergabung dengan ribuan penggiat robotika lainnya di media sosial kami.</p>
+      </div>
+
+      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <a href="#" class="btn btn-ghost"><i class="fa-brands fa-instagram"></i> Instagram</a>
+        <a href="#" class="btn btn-ghost"><i class="fa-brands fa-youtube"></i> YouTube</a>
+        <a href="#" class="btn btn-ghost"><i class="fa-brands fa-tiktok"></i> TikTok</a>
+        <a href="#" class="btn btn-ghost"><i class="fa-brands fa-facebook"></i> Facebook</a>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-logo-text"><span>I</span>CHIBOT</div>
+          <p class="footer-tagline">Mendemokratisasi robotika kompetitif di Indonesia. Dari Yogyakarta ke seluruh dunia.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Navigasi</h4>
+          <div class="footer-links">
+            <a href="index.html">Beranda</a>
+            <a href="products.html">Produk</a>
+            <a href="pelatihan.html">Pelatihan</a>
+            <a href="blog.html">Blog</a>
+            <a href="events.html">Events</a>
+            <a href="community.html">Komunitas</a>
+            <a href="about.html">Tentang Kami</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Kategori Produk</h4>
+          <div class="footer-links">
+            <a href="products.html">Line Follower</a>
+            <a href="products.html">Sumo</a>
+            <a href="products.html">Transporter</a>
+            <a href="products.html">MyRIO</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Official Store</h4>
+          <div class="footer-marketplaces">
+            <a href="#" class="marketplace-link" target="_blank">
+              <i class="fa-solid fa-bag-shopping"></i> Shopee
+            </a>
+            <a href="#" class="marketplace-link" target="_blank">
+              <i class="fa-solid fa-store"></i> Tokopedia
+            </a>
+            <a href="#" class="marketplace-link" target="_blank">
+              <i class="fa-brands fa-tiktok"></i> TikTok Shop
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <div class="footer-copy">&copy; <span class="current-year"></span> Ichibot Robotics. Yogyakarta, Indonesia.</div>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Form submission logic to WhatsApp
+    document.getElementById('submission-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const nama = document.getElementById('nama').value;
+      const tim = document.getElementById('tim').value;
+      const event = document.getElementById('event').value;
+      const prestasi = document.getElementById('prestasi').value;
+      const linkFoto = document.getElementById('linkFoto').value;
+      
+      const message = `Halo Ichibot! Saya ingin membagikan kemenangan tim kami:%0A%0ANama: ${nama}%0ATim: ${tim}%0AKompetisi: ${event}%0APrestasi: ${prestasi}%0ALink Foto: ${linkFoto}%0A%0ATerima kasih!`;
+      
+      window.open(`https://wa.me/6281234567890?text=${message}`, '_blank');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pelatihan — Ichibot Robotics</title>
+  <meta name="description" content="Layanan pelatihan robotika Ichibot Robotics.">
+  
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    
+    .product-card-wrap {
+      opacity: 0;
+    }
+    .product-card-wrap.animate-in {
+      animation: fadeInUp 0.45s var(--ease-out) forwards;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-mark">I</div>
+        <div class="nav-logo-text">ICHIBOT</div>
+      </a>
+      
+            <div class="nav-links">
+        <div class="nav-item">
+          <a href="#" style="cursor: pointer;">Produk & Layanan <i class="fa-solid fa-chevron-down" style="font-size: 0.8em; margin-left: 4px;"></i></a>
+          <div class="nav-dropdown">
+            <a href="products.html">Robot Edukasi</a>
+            <a href="pelatihan.html">Pelatihan Robot</a>
+            <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20ingin%20info%20tentang%20Servis%20Robot" target="_blank">Servis Robot</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="#" style="cursor: pointer;">Komunitas <i class="fa-solid fa-chevron-down" style="font-size: 0.8em; margin-left: 4px;"></i></a>
+          <div class="nav-dropdown">
+            <a href="blog.html">Blog & Berita</a>
+            <a href="blog.html">Juara / Hall of Champions</a>
+            <a href="community.html">Komunitas Ichibot</a>
+            <a href="about.html">Tentang Kami</a>
+          </div>
+        </div>
+        <a href="events.html">Event Update</a>
+        <a href="https://docs.ichibot.id" target="_blank">Docs</a>
+      </div>
+<div class="nav-cta">
+        <a href="https://user.ichibot.id" class="btn btn-red btn-sm">
+          <i class="fa-solid fa-user"></i> Login
+        </a>
+      </div>
+
+      <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+  <!-- Page Hero -->
+  <header class="page-hero">
+    <div class="container reveal">
+      <div class="section-label">Layanan Kami</div>
+      <h1>Program Pelatihan</h1>
+      <p class="text-secondary">Tingkatkan skill robotikamu bersama para expert dari Ichibot Robotics.</p>
+    </div>
+  </header>
+
+  <!-- Training Catalog -->
+  <section class="section">
+    <div class="container">
+      
+      <div class="product-grid">
+        <!-- 9. Pelatihan Line Follower Dasar -->
+        <div class="product-card-wrap">
+          <div class="glass-card product-card">
+            <div class="product-card-image">
+              <img src="https://placehold.co/600x400/111111/444444?text=Pelatihan+LF+Dasar" alt="Pelatihan Line Follower Dasar">
+              <span class="badge badge-white product-card-badge">Pelatihan</span>
+            </div>
+            <div class="product-card-body">
+              <h3 class="product-card-name">Pelatihan Line Follower Dasar</h3>
+              <div class="product-card-price" style="flex-direction:column; gap:4px; font-size:0.9rem;">
+                <div style="display:flex; justify-content:space-between; width:100%;"><span>Di Ichibot</span><span class="price-current">Rp 1.000.000</span></div>
+                <div style="display:flex; justify-content:space-between; width:100%;"><span>In-House</span><span class="price-current">Rp 1.500.000</span></div>
+              </div>
+              <ul class="product-card-specs">
+                <li>1 Tentor Expert &middot; 1 Hari</li>
+                <li>Max 2 Tim (6 Orang)</li>
+                <li>2 Unit Robot dipinjamkan</li>
+                <li>Basic Knowledge, Setting Track Basic</li>
+              </ul>
+              <div class="product-card-actions">
+                <a href="pelatihan-basic.html" class="btn btn-ghost btn-sm">Detail</a>
+                <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20tertarik%20dengan%20Pelatihan%20Line%20Follower%20Dasar" target="_blank" class="btn btn-red btn-sm">Order WhatsApp</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10. Pelatihan Line Follower Perlombaan -->
+        <div class="product-card-wrap">
+          <div class="glass-card product-card">
+            <div class="product-card-image">
+              <img src="https://placehold.co/600x400/111111/444444?text=Pelatihan+LF+Perlombaan" alt="Pelatihan Line Follower Perlombaan">
+              <span class="badge badge-white product-card-badge">Pelatihan</span>
+            </div>
+            <div class="product-card-body">
+              <h3 class="product-card-name">Pelatihan Line Follower Perlombaan</h3>
+              <div class="product-card-price" style="flex-direction:column; gap:4px; font-size:0.9rem;">
+                <div style="display:flex; justify-content:space-between; width:100%;"><span>Di Ichibot</span><span class="price-current">Rp 1.500.000</span></div>
+                <div style="display:flex; justify-content:space-between; width:100%;"><span>In-House</span><span class="price-current">Rp 2.000.000</span></div>
+              </div>
+              <ul class="product-card-specs">
+                <li>1 Tentor Expert &middot; 1 Hari</li>
+                <li>Max 2 Tim &middot; 2 Unit Robot</li>
+                <li>Full training menyelesaikan track perlombaan</li>
+              </ul>
+              <div class="product-card-actions">
+                <a href="pelatihan-competition.html" class="btn btn-ghost btn-sm">Detail</a>
+                <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20tertarik%20dengan%20Pelatihan%20Line%20Follower%20Perlombaan" target="_blank" class="btn btn-red btn-sm">Order WhatsApp</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11. Pelatihan MyRIO 1900 Pengoperasian -->
+        <div class="product-card-wrap">
+          <div class="glass-card product-card">
+            <div class="product-card-image">
+              <img src="https://placehold.co/600x400/111111/444444?text=Pelatihan+MyRIO" alt="Pelatihan MyRIO 1900 Pengoperasian">
+              <span class="badge badge-white product-card-badge">Pelatihan</span>
+            </div>
+            <div class="product-card-body">
+              <h3 class="product-card-name">Pelatihan MyRIO 1900 Pengoperasian</h3>
+              <div class="product-card-price">
+                <span class="price-current">Rp 4.000.000</span>
+                <span class="price-original">Rp 4.500.000</span>
+              </div>
+              <ul class="product-card-specs">
+                <li>Robot dipinjamkan &middot; Tentor Expert</li>
+                <li>Sertifikat &middot; Konsumsi &middot; 2 Hari &middot; Max 3 Org</li>
+                <li>Movement Program &middot; Object Management</li>
+                <li>Path Planning &middot; Simulasi LKS</li>
+              </ul>
+              <div class="product-card-actions">
+                <a href="pelatihan-myrio.html" class="btn btn-ghost btn-sm">Detail</a>
+                <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20tertarik%20dengan%20Pelatihan%20MyRIO%201900%20Pengoperasian" target="_blank" class="btn btn-red btn-sm">Order WhatsApp</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-logo-text"><span>I</span>CHIBOT</div>
+          <p class="footer-tagline">Mendemokratisasi robotika kompetitif di Indonesia. Dari Yogyakarta ke seluruh dunia.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Navigasi</h4>
+          <div class="footer-links">
+            <a href="index.html">Beranda</a>
+            <a href="products.html">Produk</a>
+            <a href="pelatihan.html">Pelatihan</a>
+            <a href="blog.html">Blog</a>
+            <a href="events.html">Events</a>
+            <a href="community.html">Komunitas</a>
+            <a href="about.html">Tentang Kami</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Kategori Produk</h4>
+          <div class="footer-links">
+            <a href="products.html">Line Follower</a>
+            <a href="products.html">Sumo</a>
+            <a href="products.html">Transporter</a>
+            <a href="products.html">MyRIO</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Official Store</h4>
+          <div class="footer-marketplaces">
+            <a href="#" class="marketplace-link" target="_blank">
+              <i class="fa-solid fa-bag-shopping"></i> Shopee
+            </a>
+            <a href="#" class="marketplace-link" target="_blank">
+              <i class="fa-solid fa-store"></i> Tokopedia
+            </a>
+            <a href="#" class="marketplace-link" target="_blank">
+              <i class="fa-brands fa-tiktok"></i> TikTok Shop
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <div class="footer-copy">&copy; <span class="current-year"></span> Ichibot Robotics. Yogyakarta, Indonesia.</div>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.product-card-wrap').forEach((card, i) => {
+        card.style.animationDelay = (i * 0.08) + 's';
+        card.classList.add('animate-in');
+      });
+    });
+  </script>
+</body>
+</html>

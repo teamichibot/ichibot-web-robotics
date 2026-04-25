@@ -1,0 +1,465 @@
+<!DOCTYPE html><html lang="id"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produk Kami — Ichibot Robotics</title>
+  <meta name="description" content="Katalog produk robotika kompetitif Ichibot. Line Follower, Sumo, Transporter, dan MyRIO.">
+  
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* Specific styles for products page */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    
+    .product-card-wrap {
+      opacity: 0;
+    }
+    .product-card-wrap.animate-in {
+      animation: fadeInUp 0.45s var(--ease-out) forwards;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-mark">I</div>
+        <div class="nav-logo-text">ICHIBOT</div>
+      </a>
+      
+            <div class="nav-links">
+        <div class="nav-item">
+          <a href="#" style="cursor: pointer;">Produk &amp; Layanan <i class="fa-solid fa-chevron-down" style="font-size: 0.8em; margin-left: 4px;"></i></a>
+          <div class="nav-dropdown">
+            <a href="products.html">Robot Edukasi</a>
+            <a href="pelatihan.html">Pelatihan Robot</a>
+            <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20ingin%20info%20tentang%20Servis%20Robot" target="_blank">Servis Robot</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="#" style="cursor: pointer;">Komunitas <i class="fa-solid fa-chevron-down" style="font-size: 0.8em; margin-left: 4px;"></i></a>
+          <div class="nav-dropdown">
+            <a href="blog.html">Blog &amp; Berita</a>
+            <a href="blog.html">Juara / Hall of Champions</a>
+            <a href="community.html">Komunitas Ichibot</a>
+            <a href="about.html">Tentang Kami</a>
+          </div>
+        </div>
+        <a href="events.html">Event Update</a>
+        <a href="https://docs.ichibot.id" target="_blank">Docs</a>
+      </div>
+<div class="nav-cta">
+        <a href="https://user.ichibot.id" class="btn btn-red btn-sm">
+          <i class="fa-solid fa-user"></i> Login
+        </a>
+      </div>
+
+      <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+  <!-- Page Hero -->
+  <header class="page-hero">
+    <div class="container reveal">
+      <div class="section-label">Katalog Resmi</div>
+      <h1>Produk Robot</h1>
+      <p class="text-secondary">Pilih dan sesuaikan hardware tangguh untuk kebutuhan riset maupun kompetisi robotikamu bersama Ichibot.</p>
+    </div>
+  </header>
+
+  <!-- Products Catalog -->
+  <section class="section">
+    <div class="container">
+      
+      <!-- Filters -->
+      <div class="filter-tabs reveal reveal-d1">
+        <button class="filter-tab active" data-filter="semua">Semua</button>
+        <button class="filter-tab" data-filter="line-follower">Line Follower</button>
+        <button class="filter-tab" data-filter="sumo">Sumo</button>
+        <button class="filter-tab" data-filter="transporter">Transporter</button>
+        <button class="filter-tab" data-filter="myrio">MyRIO</button>
+      </div>
+      
+      <!-- Product Grid -->
+      <div class="product-grid">
+        
+        <!-- 1. Ichiduino Basic+ -->
+        <div class="product-card-wrap" data-category="line-follower">
+          <div class="glass-card product-card">
+            <div class="product-card-image">
+              <img src="https://placehold.co/600x400/111111/444444?text=Ichiduino+Basic+" alt="Ichiduino Basic+">
+              <span class="badge badge-white product-card-badge">Line Follower</span>
+            </div>
+            <div class="product-card-body">
+              <h3 class="product-card-name">Ichiduino Basic+</h3>
+              <div class="product-card-price" style="flex-direction:column; gap:4px; font-size:0.9rem;">
+                <div style="display:flex; justify-content:space-between; width:100%;"><span>Belum Dirakit</span><span class="price-current">Rp 585.000</span></div>
+                <div style="display:flex; justify-content:space-between; width:100%;"><span>Sudah Dirakit</span><span class="price-current">Rp 780.000</span></div>
+              </div>
+              <ul class="product-card-specs">
+                <li>Arduino Nano Atmega328P</li>
+                <li>8 Optic Line Sensor</li>
+                <li>OLED 0.96" · 2x 18650 Battery</li>
+                <li>DIY Kit / Perakitan mandiri</li>
+              </ul>
+              <div class="product-card-actions">
+                <a href="product-ichiduino-basic-plus.html" class="btn btn-ghost btn-sm">Detail</a>
+                <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20tertarik%20dengan%20Ichiduino%20Basic%2B" target="_blank" class="btn btn-red btn-sm">Order WhatsApp</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Ichiduino Pro -->
+        <div class="product-card-wrap" data-category="line-follower">
+          <div class="glass-card product-card">
+            <div class="product-card-image">
+              <img src="https://placehold.co/600x400/111111/444444?text=Ichiduino+Pro" alt="Ichiduino Pro">
+              <span class="badge badge-white product-card-badge">Line Follower</span>
+            </div>
+            <div class="product-card-body">
+              <h3 class="product-card-name">Ichiduino Pro</h3>
+              <div class="product-card-price">
+                <span class="price-current">Rp 1.949.025</span>
+                <span class="price-original">Rp 1.999.000</span>
+              </div>
+              <ul class="product-card-specs">
+                <li>Atmega 2560</li>
+                <li>12 Optic Line Sensor · OLED 0.96"</li>
+                <li>2s 400mAh Lipo · Magnetic Charger</li>
+                <li>mBlock + Arduino IDE</li>
+              </ul>
+              <div class="product-card-actions">
+                <a href="product-ichiduino-pro.html" class="btn btn-ghost btn-sm">Detail</a>
+                <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20tertarik%20dengan%20Ichiduino%20Pro" target="_blank" class="btn btn-red btn-sm">Order WhatsApp</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Ultimate 5 Max -->
+        <div class="product-card-wrap" data-category="line-follower">
+          <div class="glass-card product-card">
+            <div class="product-card-image">
+              <img src="https://img.ichibot.id/uploads/6d6aa305.jpg" alt="Ultimate 5 Max">
+              <span class="badge badge-red product-card-featured">Bestseller · 17 Negara</span>
+              <span class="badge badge-white product-card-badge">Line Follower</span>
+            </div>
+            <div class="product-card-body">
+              <h3 class="product-card-name">Ultimate 5 Max</h3>
+              <div class="product-card-price">
+                <span class="price-current">Rp 2.339.025</span>
+                <span class="price-original">Rp 2.399.000</span>
+              </div>
+              <ul class="product-card-specs">
+                <li>14 Optic Line Sensor</li>
+                <li>Gyro MPU-6050 · WiFi + BT</li>
+                <li>Update firmware via WiFi · Layar 1.3"</li>
+                <li>25mm Motor DC 2500RPM</li>
+              </ul>
+              <div class="product-card-actions">
+                <a href="product-detail.html" class="btn btn-ghost btn-sm">Detail</a>
+                <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20tertarik%20dengan%20Ultimate%205%20Max" target="_blank" class="btn btn-red btn-sm">Order WhatsApp</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Sumo 500g -->
+        <div class="product-card-wrap" data-category="sumo">
+          <div class="glass-card product-card">
+            <div class="product-card-image">
+              <img src="https://placehold.co/600x400/111111/444444?text=Sumo+500g" alt="Sumo 500g">
+              <span class="badge badge-white product-card-badge">Sumo</span>
+            </div>
+            <div class="product-card-body">
+              <h3 class="product-card-name">Sumo 500g</h3>
+              <div class="product-card-price">
+                <span class="price-current">Rp 1.755.000</span>
+                <span class="price-original">Rp 1.800.000</span>
+              </div>
+              <ul class="product-card-specs">
+                <li>ESP32 · WiFi + BT</li>
+                <li>3s 1000mAh Lipo</li>
+                <li>16mm Motor 500RPM</li>
+                <li>Sharp Blade · Silicone Wheel</li>
+              </ul>
+              <div class="product-card-actions">
+                <a href="product-sumo-500g.html" class="btn btn-ghost btn-sm">Detail</a>
+                <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20tertarik%20dengan%20Sumo%20500g" target="_blank" class="btn btn-red btn-sm">Order WhatsApp</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Sumo 1 Kg -->
+        <div class="product-card-wrap" data-category="sumo">
+          <div class="glass-card product-card">
+            <div class="product-card-image">
+              <img src="https://placehold.co/600x400/111111/444444?text=Sumo+1+Kg" alt="Sumo 1 Kg">
+              <span class="badge badge-white product-card-badge">Sumo</span>
+            </div>
+            <div class="product-card-body">
+              <h3 class="product-card-name">Sumo 1 Kg</h3>
+              <div class="product-card-price">
+                <span class="price-current">Rp 2.340.000</span>
+                <span class="price-original">Rp 2.400.000</span>
+              </div>
+              <ul class="product-card-specs">
+                <li>ESP32 · WiFi + BT</li>
+                <li>3s 1200mAh Lipo</li>
+                <li>25mm Motor 500RPM</li>
+                <li>Stall Torque 30kg.cm · Sharp Blade</li>
+              </ul>
+              <div class="product-card-actions">
+                <a href="product-sumo-1kg.html" class="btn btn-ghost btn-sm">Detail</a>
+                <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20tertarik%20dengan%20Sumo%201%20Kg" target="_blank" class="btn btn-red btn-sm">Order WhatsApp</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Transporter Mecanum -->
+        <div class="product-card-wrap" data-category="transporter">
+          <div class="glass-card product-card">
+            <div class="product-card-image">
+              <img src="https://placehold.co/600x400/111111/444444?text=Transporter+Mecanum" alt="Transporter Mecanum">
+              <span class="badge badge-white product-card-badge">Transporter</span>
+            </div>
+            <div class="product-card-body">
+              <h3 class="product-card-name">Transporter Mecanum</h3>
+              <div class="product-card-price">
+                <span class="price-current">Rp 3.022.500</span>
+                <span class="price-original">Rp 3.100.000</span>
+              </div>
+              <ul class="product-card-specs">
+                <li>ESP32 · WiFi + BT</li>
+                <li>Mecanum 60mm Wheel</li>
+                <li>PS3 Remote</li>
+                <li>Gripper + Elbow + Lifter axis</li>
+              </ul>
+              <div class="product-card-actions">
+                <a href="product-transporter-mecanum.html" class="btn btn-ghost btn-sm">Detail</a>
+                <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20tertarik%20dengan%20Transporter%20Mecanum" target="_blank" class="btn btn-red btn-sm">Order WhatsApp</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Transporter Ultimate Omni -->
+        <div class="product-card-wrap" data-category="transporter">
+          <div class="glass-card product-card">
+            <div class="product-card-image">
+              <img src="https://placehold.co/600x400/111111/444444?text=Transporter+Ultimate+Omni" alt="Transporter Ultimate Omni">
+              <span class="badge badge-white product-card-badge">Transporter</span>
+            </div>
+            <div class="product-card-body">
+              <h3 class="product-card-name">Transporter Ultimate Omni</h3>
+              <div class="product-card-price">
+                <span class="price-current">Rp 3.510.000</span>
+                <span class="price-original">Rp 3.600.000</span>
+              </div>
+              <ul class="product-card-specs">
+                <li>ESP32 · WiFi + BT</li>
+                <li>58mm Omni Wheel · 3s 1200mAh Lipo</li>
+                <li>PS3 Remote</li>
+                <li>Gripper + Elbow + Lifter axis</li>
+              </ul>
+              <div class="product-card-actions">
+                <a href="product-transporter-omni.html" class="btn btn-ghost btn-sm">Detail</a>
+                <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20tertarik%20dengan%20Transporter%20Ultimate%20Omni" target="_blank" class="btn btn-red btn-sm">Order WhatsApp</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. Sumo 2 Kg -->
+        <div class="product-card-wrap" data-category="sumo">
+          <div class="glass-card product-card">
+            <div class="product-card-image">
+              <img src="https://placehold.co/600x400/111111/444444?text=Sumo+2+Kg" alt="Sumo 2 Kg">
+              <span class="badge badge-white product-card-badge">Sumo</span>
+            </div>
+            <div class="product-card-body">
+              <h3 class="product-card-name">Sumo 2 Kg</h3>
+              <div class="product-card-price">
+                <span class="price-current">Rp 3.315.000</span>
+                <span class="price-original">Rp 3.400.000</span>
+              </div>
+              <ul class="product-card-specs">
+                <li>ESP32 · WiFi + BT</li>
+                <li>3s 2000mAh Lipo</li>
+                <li>37mm Motor 300RPM</li>
+                <li>Stall Torque 65kg.cm · Sharp Blade</li>
+              </ul>
+              <div class="product-card-actions">
+                <a href="product-sumo-2kg.html" class="btn btn-ghost btn-sm">Detail</a>
+                <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20tertarik%20dengan%20Sumo%202%20Kg" target="_blank" class="btn btn-red btn-sm">Order WhatsApp</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. Transporter Mecanum Pro -->
+        <div class="product-card-wrap" data-category="transporter">
+          <div class="glass-card product-card">
+            <div class="product-card-image">
+              <img src="https://placehold.co/600x400/111111/444444?text=Transporter+Mecanum+Pro" alt="Transporter Mecanum Pro">
+              <span class="badge badge-white product-card-badge">Transporter</span>
+            </div>
+            <div class="product-card-body">
+              <h3 class="product-card-name">Transporter Mecanum Pro</h3>
+              <div class="product-card-price">
+                <span class="price-current">Rp 4.095.000</span>
+                <span class="price-original">Rp 4.200.000</span>
+              </div>
+              <ul class="product-card-specs">
+                <li>ESP32 · WiFi + BT</li>
+                <li>Mecanum 80mm Wheel</li>
+                <li>PS3 Remote · 3s 1500mAh Lipo</li>
+                <li>Gripper + Elbow + Lifter + Rotator</li>
+              </ul>
+              <div class="product-card-actions">
+                <a href="product-transporter-mecanum-pro.html" class="btn btn-ghost btn-sm">Detail</a>
+                <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20tertarik%20dengan%20Transporter%20Mecanum%20Pro" target="_blank" class="btn btn-red btn-sm">Order WhatsApp</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10. Mobile Robot Omnidirectional myRIO 1900 -->
+        <div class="product-card-wrap" data-category="myrio">
+          <div class="glass-card product-card">
+            <div class="product-card-image">
+              <img src="https://placehold.co/600x400/111111/444444?text=myRIO+1900+Mobile+Robot" alt="myRIO 1900 Mobile Robot">
+              <span class="badge badge-white product-card-badge">MyRIO</span>
+            </div>
+            <div class="product-card-body">
+              <h3 class="product-card-name" style="font-size:1.1rem;">Mobile Robot Omnidirectional myRIO 1900</h3>
+              <div class="product-card-price">
+                <span class="price-current">Rp 75.000.000</span>
+              </div>
+              <ul class="product-card-specs">
+                <li>National Instruments myRIO 1900</li>
+                <li>7 Sensor Jarak · 2 Sensor Line</li>
+                <li>Logitech HD Camera</li>
+                <li>Lifter + Gripper · Termasuk software license</li>
+              </ul>
+              <div class="product-card-actions">
+                <a href="product-myrio-1900.html" class="btn btn-ghost btn-sm">Detail</a>
+                <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20tertarik%20dengan%20Mobile%20Robot%20myRIO%201900" target="_blank" class="btn btn-red btn-sm">Order WhatsApp</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11. Mobile Robot Omnidirectional myRIO 1950 -->
+        <div class="product-card-wrap" data-category="myrio">
+          <div class="glass-card product-card">
+            <div class="product-card-image">
+              <img src="https://placehold.co/600x400/111111/444444?text=myRIO+1950+Mecanum" alt="myRIO 1950 Mecanum Robot">
+              <span class="badge badge-white product-card-badge">MyRIO</span>
+            </div>
+            <div class="product-card-body">
+              <h3 class="product-card-name" style="font-size:1.1rem;">Mobile Robot Mecanum myRIO 1950</h3>
+              <div class="product-card-price">
+                <span class="price-current">Rp 82.000.000</span>
+              </div>
+              <ul class="product-card-specs">
+                <li>National Instruments myRIO 1950</li>
+                <li>Mecanum 80mm Wheel · 7 Sensor Jarak</li>
+                <li>Logitech HD Camera · Gyro</li>
+                <li>Lifter + Gripper · Termasuk software license</li>
+              </ul>
+              <div class="product-card-actions">
+                <a href="product-myrio-1950.html" class="btn btn-ghost btn-sm">Detail</a>
+                <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20tertarik%20dengan%20Mobile%20Robot%20myRIO%201950%20Mecanum" target="_blank" class="btn btn-red btn-sm">Order WhatsApp</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-logo-text"><span>I</span>CHIBOT</div>
+          <p class="footer-tagline">Mendemokratisasi robotika kompetitif di Indonesia. Dari Yogyakarta ke seluruh dunia.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Navigasi</h4>
+          <div class="footer-links">
+            <a href="index.html">Beranda</a>
+            <a href="products.html">Produk</a>
+            <a href="pelatihan.html">Pelatihan</a>
+            <a href="blog.html">Blog</a>
+            <a href="events.html">Events</a>
+            <a href="community.html">Komunitas</a>
+            <a href="about.html">Tentang Kami</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Kategori Produk</h4>
+          <div class="footer-links">
+            <a href="products.html">Line Follower</a>
+            <a href="products.html">Sumo</a>
+            <a href="products.html">Transporter</a>
+            <a href="products.html">MyRIO</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Official Store</h4>
+          <div class="footer-marketplaces">
+            <a href="#" class="marketplace-link" target="_blank">
+              <i class="fa-solid fa-bag-shopping"></i> Shopee
+            </a>
+            <a href="#" class="marketplace-link" target="_blank">
+              <i class="fa-solid fa-store"></i> Tokopedia
+            </a>
+            <a href="#" class="marketplace-link" target="_blank">
+              <i class="fa-brands fa-tiktok"></i> TikTok Shop
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <div class="footer-copy">© <span class="current-year"></span> Ichibot Robotics. Yogyakarta, Indonesia.</div>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/products.js"></script>
+
+
+</body></html>

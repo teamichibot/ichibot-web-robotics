@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pelatihan Line Follower Dasar — Ichibot Robotics</title>
+  <meta name="description" content="Pelatihan Line Follower Dasar di Ichibot Robotics.">
+  
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    /* Specific styles for product detail page */
+    .detail-hero {
+      padding-top: 140px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--glass-border-subtle);
+    }
+    
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 64px;
+    }
+    
+    .detail-image-wrap {
+      border-radius: var(--radius-card-lg);
+      overflow: hidden;
+      border: 1px solid var(--glass-border);
+      background: var(--bg-secondary);
+      box-shadow: var(--shadow-card);
+      position: relative;
+    }
+    
+    .detail-image-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform var(--transition-slow);
+    }
+    
+    .detail-image-wrap:hover img {
+      transform: scale(1.03);
+    }
+    
+    .detail-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    .detail-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 16px;
+      color: var(--text-primary);
+    }
+    
+    .detail-price-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    
+    .detail-price {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent-red-light);
+    }
+    
+    .detail-price-coret {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+    
+    .detail-desc-title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+    
+    .detail-desc-text {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+    
+    .spec-section {
+      padding: 48px 0;
+      border-top: 1px solid var(--glass-border);
+    }
+    
+    .spec-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    
+    .spec-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .spec-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      color: var(--text-primary);
+      font-size: 0.95rem;
+    }
+    
+    .spec-list li::before {
+      content: '\f00c';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
+      color: var(--accent-red);
+      margin-top: 2px;
+    }
+    
+    @media (max-width: 900px) {
+      .detail-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .spec-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-mark">I</div>
+        <div class="nav-logo-text">ICHIBOT</div>
+      </a>
+      
+            <div class="nav-links">
+        <div class="nav-item">
+          <a href="#" style="cursor: pointer;">Produk & Layanan <i class="fa-solid fa-chevron-down" style="font-size: 0.8em; margin-left: 4px;"></i></a>
+          <div class="nav-dropdown">
+            <a href="products.html">Robot Edukasi</a>
+            <a href="pelatihan.html">Pelatihan Robot</a>
+            <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20ingin%20info%20tentang%20Servis%20Robot" target="_blank">Servis Robot</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="#" style="cursor: pointer;">Komunitas <i class="fa-solid fa-chevron-down" style="font-size: 0.8em; margin-left: 4px;"></i></a>
+          <div class="nav-dropdown">
+            <a href="blog.html">Blog & Berita</a>
+            <a href="blog.html">Juara / Hall of Champions</a>
+            <a href="community.html">Komunitas Ichibot</a>
+            <a href="about.html">Tentang Kami</a>
+          </div>
+        </div>
+        <a href="events.html">Event Update</a>
+        <a href="https://docs.ichibot.id" target="_blank">Docs</a>
+      </div>
+<div class="nav-cta">
+        <a href="https://user.ichibot.id" class="btn btn-red btn-sm">
+          <i class="fa-solid fa-user"></i> Login
+        </a>
+      </div>
+
+      <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <section class="detail-hero">
+      <div class="container reveal">
+        <a href="pelatihan.html" class="text-secondary" style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 24px; text-decoration: none; font-size: 0.9rem;">
+          <i class="fa-solid fa-arrow-left"></i> Kembali ke Pelatihan
+        </a>
+        
+        <div class="detail-grid">
+          <!-- Image -->
+          <div class="detail-image-wrap reveal-d1">
+            <span class="badge badge-white" style="position: absolute; top: 16px; left: 16px; z-index: 2;">Pelatihan Dasar</span>
+            <!-- REPLACE: Foto HD Ultimate 5 Max -->
+            <img src="https://placehold.co/800x800/111111/444444?text=Pelatihan+LF+Dasar" alt="Pelatihan Line Follower Dasar">
+          </div>
+          
+          <!-- Info -->
+          <div class="detail-info reveal-d2">
+            <h1 class="detail-title">Pelatihan Line Follower Dasar</h1>
+            <div class="detail-price-wrap">
+<span class="detail-price">Rp 1.000.000</span> <span class="detail-price-coret" style="text-decoration:none;">(Di Ichibot)</span> / <span class="detail-price">Rp 1.500.000</span> <span class="detail-price-coret" style="text-decoration:none;">(In-House)</span>
+            </div>
+            
+            <div class="glass-card" style="padding: 24px; margin-bottom: 32px;">
+              <h2 class="detail-desc-title">Deskripsi Singkat</h2>
+              <p class="detail-desc-text">
+                Program pelatihan dasar yang dirancang untuk pemula. Ini adalah workshop satu hari penuh dengan maksimal dua tim yang dipandu oleh tentor expert dari Ichibot.
+              </p>
+            </div>
+            
+            <div style="display: flex; gap: 16px;">
+              <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20ingin%20info%20mengenai%20Pelatihan%20Line%20Follower%20Dasar" target="_blank" class="btn btn-red btn-lg" style="flex: 1;">
+                <i class="fa-brands fa-whatsapp"></i> Daftar Pelatihan
+              </a>
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Specifications -->
+    <section class="section reveal">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title" style="font-size: 1.8rem;">Detail / Informasi</h2>
+        </div>
+        
+        <div class="glass-card" style="padding: 32px 48px;">
+          <div class="spec-grid">
+            <ul class="spec-list">
+              <li>Pengenalan robot line follower</li>
+              <li>Interpretasi sensor optik</li>
+              <li>Dasar pemrograman Arduino</li>
+            </ul>
+            <ul class="spec-list">
+              <li>Kalibrasi parameter dasar</li>
+              <li>Praktik langsung di track sederhana</li>
+              <li>Robot disediakan selama sesi</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <!-- Footer content sama dengan halaman lain -->
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-logo-text"><span>I</span>CHIBOT</div>
+          <p class="footer-tagline">Mendemokratisasi robotika kompetitif di Indonesia. Dari Yogyakarta ke seluruh dunia.</p>
+        </div>
+        
+        <div class="footer-col">
+          <h4 class="footer-heading">Navigasi</h4>
+          <div class="footer-links">
+            <a href="index.html">Beranda</a>
+            <a href="products.html">Produk</a>
+            <a href="pelatihan.html">Pelatihan</a>
+            <a href="blog.html">Blog</a>
+            <a href="events.html">Events</a>
+            <a href="community.html">Komunitas</a>
+            <a href="about.html">Tentang Kami</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Kategori Produk</h4>
+          <div class="footer-links">
+            <a href="products.html">Line Follower</a>
+            <a href="products.html">Sumo</a>
+            <a href="products.html">Transporter</a>
+            <a href="products.html">MyRIO</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Official Store</h4>
+          <div class="footer-marketplaces">
+            <a href="#" class="marketplace-link" target="_blank">
+              <i class="fa-solid fa-bag-shopping"></i> Shopee
+            </a>
+            <a href="#" class="marketplace-link" target="_blank">
+              <i class="fa-solid fa-store"></i> Tokopedia
+            </a>
+            <a href="#" class="marketplace-link" target="_blank">
+              <i class="fa-brands fa-tiktok"></i> TikTok Shop
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <div class="footer-copy">&copy; <span class="current-year"></span> Ichibot Robotics. Yogyakarta, Indonesia.</div>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

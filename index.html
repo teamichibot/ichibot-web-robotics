@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ichibot Robotics — Robot Line Follower Paling Banyak Menang di Indonesia</title>
+  <meta name="description"
+    content="Ichibot Robotics - Indonesia's leading competitive robotics brand. Ultimate 5 Max diekspor ke 17+ negara dengan ribuan kemenangan.">
+
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* ── Hero Carousel ──────────────────────────────────── */
+    .hero-carousel {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.75s var(--ease-out), transform 0.75s var(--ease-out);
+      pointer-events: none;
+    }
+    .hero-slide.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    /* Slide 1 — default brand hero */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      opacity: 0.15;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-bg svg {
+      width: 120%; height: 120%;
+      stroke: var(--glass-border);
+      stroke-width: 1.5;
+      fill: none;
+    }
+    .hero-track-path { stroke: var(--accent-red); stroke-width: 2; }
+    .hero-robot-dot {
+      fill: var(--accent-red);
+      filter: drop-shadow(0 0 12px var(--accent-red));
+      offset-path: path('M100,500 Q300,200 500,500 T900,500 T1300,200');
+      animation: robotMove 4s linear infinite;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      text-align: center;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+
+    /* ── Slide banner layout (slides 2–5) ───────────────── */
+    .slide-banner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+      padding: 0 40px;
+    }
+    .slide-banner-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .slide-banner-copy h2 {
+      font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+    }
+    .slide-banner-desc {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 38ch;
+      line-height: 1.65;
+    }
+    .slide-banner-price {
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--accent-red-light);
+      letter-spacing: -0.01em;
+    }
+    .slide-banner-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* Visual area — product/pelatihan image */
+    .slide-banner-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .slide-banner-img {
+      width: 100%;
+      max-width: 520px;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border-radius: var(--radius-card-lg);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.55), 0 0 0 1px var(--glass-inset) inset;
+      display: block;
+    }
+    /* Subtle red glow behind the image */
+    .slide-banner-visual::after {
+      content: '';
+      position: absolute;
+      inset: 20% 10%;
+      background: radial-gradient(ellipse, rgba(220,30,30,0.18) 0%, transparent 70%);
+      z-index: -1;
+      border-radius: 50%;
+      filter: blur(32px);
+    }
+
+    /* Slide 4 — achievement: giant stat as visual */
+    .slide-achievement-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .slide-big-stat {
+      font-family: var(--font-display);
+      font-size: clamp(6rem, 13vw, 10rem);
+      font-weight: 800;
+      color: var(--accent-red);
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+      text-shadow: 0 0 80px rgba(220,30,30,0.35);
+    }
+    .slide-big-stat-label {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .slide-big-stat-sub {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      max-width: 28ch;
+      line-height: 1.5;
+      margin-top: 8px;
+    }
+
+    /* Slide 5 — event: featured event card */
+    .slide-event-card {
+      background: var(--glass-bg);
+      border: 1px solid rgba(220,30,30,0.35);
+      border-radius: var(--radius-card-lg);
+      padding: 36px 32px;
+      backdrop-filter: blur(var(--blur-md));
+      box-shadow: 0 0 48px rgba(220,30,30,0.12), var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .slide-event-date-row {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .slide-event-day-xl {
+      font-family: var(--font-display);
+      font-size: 5rem;
+      font-weight: 800;
+      color: var(--accent-red);
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .slide-event-month-xl {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .slide-event-name-xl {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+    .slide-event-loc-xl {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ── Carousel controls ──────────────────────────────── */
+    .carousel-progress {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: rgba(255,255,255,0.06);
+      z-index: 20;
+    }
+    .carousel-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--accent-red);
+    }
+    .carousel-dots {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 20;
+    }
+    .carousel-dot {
+      width: 8px; height: 8px;
+      border-radius: 99px;
+      background: rgba(255,255,255,0.28);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: background var(--transition-base), width var(--transition-base);
+    }
+    .carousel-dot.active {
+      width: 24px;
+      background: var(--accent-red);
+    }
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 20;
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(10,10,10,0.5);
+      border: 1px solid var(--glass-border);
+      color: var(--text-secondary);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all var(--transition-base);
+      backdrop-filter: blur(8px);
+    }
+    .carousel-arrow:hover {
+      color: var(--text-primary);
+      border-color: rgba(255,255,255,0.22);
+      background: rgba(10,10,10,0.75);
+    }
+    .carousel-prev { left: 24px; }
+    .carousel-next { right: 24px; }
+
+    /* ── Map Section ───────────────────────────────────── */
+    .map-section { position: relative; overflow: hidden; }
+    .map-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 2/1;
+      max-height: 70vh;
+      margin: 0 auto;
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-card-lg);
+      background: var(--bg-secondary);
+      box-shadow: 0 0 0 1px var(--glass-inset) inset, var(--shadow-card);
+      overflow: hidden;
+    }
+    .map-container:hover {
+      border-color: var(--glass-border-red);
+      box-shadow: 0 0 28px var(--accent-red-glow), var(--shadow-card-hover);
+    }
+
+    /* Featured Products */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    /* Achievement Feed */
+    .achievement-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .slide-banner { grid-template-columns: 1fr; gap: 36px; padding: 0 24px; }
+      .slide-banner-copy h2 { font-size: clamp(2rem, 6vw, 3rem); }
+      .slide-banner-visual { order: -1; }
+      .slide-banner-img { max-width: 360px; }
+      .slide-big-stat { font-size: clamp(5rem, 15vw, 7rem); }
+      .slide-event-day-xl { font-size: 3.5rem; }
+      .slide-event-name-xl { font-size: 1.15rem; }
+    }
+    @media (max-width: 768px) {
+      .map-container { aspect-ratio: 4/3; }
+      .carousel-arrow { display: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav" aria-label="Main navigation">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="nav-logo-mark">I</div>
+        <div class="nav-logo-text">ICHIBOT</div>
+      </a>
+
+            <div class="nav-links">
+        <div class="nav-item">
+          <a href="#" style="cursor: pointer;">Produk & Layanan <i class="fa-solid fa-chevron-down" style="font-size: 0.8em; margin-left: 4px;"></i></a>
+          <div class="nav-dropdown">
+            <a href="products.html">Robot Edukasi</a>
+            <a href="pelatihan.html">Pelatihan Robot</a>
+            <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20ingin%20info%20tentang%20Servis%20Robot" target="_blank">Servis Robot</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="#" style="cursor: pointer;">Komunitas <i class="fa-solid fa-chevron-down" style="font-size: 0.8em; margin-left: 4px;"></i></a>
+          <div class="nav-dropdown">
+            <a href="blog.html">Blog & Berita</a>
+            <a href="blog.html">Juara / Hall of Champions</a>
+            <a href="community.html">Komunitas Ichibot</a>
+            <a href="about.html">Tentang Kami</a>
+          </div>
+        </div>
+        <a href="events.html">Event Update</a>
+        <a href="https://docs.ichibot.id" target="_blank">Docs</a>
+      </div>
+<div class="nav-cta">
+        <a href="https://user.ichibot.id" class="btn btn-red btn-sm">
+          <i class="fa-solid fa-user"></i> Login
+        </a>
+      </div>
+
+      <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ══ Hero Carousel ══════════════════════════════════ -->
+    <section class="hero-carousel" aria-label="Hero banner">
+
+      <!-- ─ Slide 1: Brand / Default ─ -->
+      <div class="hero-slide active" aria-hidden="false">
+        <div class="hero-bg">
+          <svg viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <path d="M-100,600 Q200,300 500,600 T1100,600 T1600,300" stroke="rgba(255,255,255,0.05)" fill="none"/>
+            <path d="M-100,550 Q200,250 500,550 T1100,550 T1600,250" stroke="rgba(255,255,255,0.03)" fill="none"/>
+            <path class="hero-track-path" d="M100,500 Q300,200 500,500 T900,500 T1300,200" fill="none"/>
+            <circle r="6" class="hero-robot-dot"/>
+          </svg>
+        </div>
+        <div class="container hero-content">
+          <div class="section-label hero-label">#1 Competitive Robotics</div>
+          <h1 class="hero-headline">Robot Line Follower Paling Banyak <span class="text-red">Menang</span> di Indonesia</h1>
+          <p class="section-subtitle hero-sub" style="margin: 20px auto; color: var(--text-primary);">Diekspor ke 17+ Negara &middot; 500+ Juara &middot; Ribuan Kemenangan</p>
+          <div class="hero-ctas">
+            <a href="products.html" class="btn btn-red btn-lg">Lihat Produk</a>
+            <a href="community.html" class="btn btn-ghost btn-lg">Bergabung dengan Komunitas</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─ Slide 2: Produk Unggulan — Ultimate 5 Max ─ -->
+      <div class="hero-slide" aria-hidden="true">
+        <div class="slide-banner">
+          <div class="slide-banner-copy">
+            <div class="section-label">Produk Unggulan · Diekspor 17+ Negara</div>
+            <h2>Ultimate 5 <span class="text-red">Max</span></h2>
+            <p class="slide-banner-desc">Robot line follower terbaik kami dengan performa juara — kecepatan tinggi, sensor presisi, dan firmware siap lomba.</p>
+            <div class="slide-banner-price">Rp 2.339.025</div>
+            <div class="slide-banner-ctas">
+              <a href="product-detail.html" class="btn btn-red btn-lg">Lihat Detail</a>
+              <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20ingin%20pesan%20Ultimate%205%20Max" target="_blank" class="btn btn-ghost btn-lg"><i class="fa-brands fa-whatsapp"></i> Pesan Sekarang</a>
+            </div>
+          </div>
+          <div class="slide-banner-visual">
+            <!-- REPLACE: foto robot Ultimate 5 Max tampak 3/4 -->
+            <img src="https://placehold.co/560x420/111111/333333?text=Ultimate+5+Max"
+                 alt="Robot Line Follower Ultimate 5 Max Ichibot" class="slide-banner-img">
+          </div>
+        </div>
+      </div>
+
+      <!-- ─ Slide 3: Program Pelatihan — LF Perlombaan ─ -->
+      <div class="hero-slide" aria-hidden="true">
+        <div class="slide-banner">
+          <div class="slide-banner-copy">
+            <div class="section-label">Program Pelatihan Intensif</div>
+            <h2>Line Follower <span class="text-red">Perlombaan</span></h2>
+            <p class="slide-banner-desc">Pelatihan 2 hari bersama tentor juara. Kuasai tuning PID, strategi lomba, dan setup robot pemenang secara langsung.</p>
+            <div class="slide-banner-price">Mulai Rp 1.500.000</div>
+            <div class="slide-banner-ctas">
+              <a href="pelatihan.html" class="btn btn-red btn-lg">Lihat Program</a>
+              <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20ingin%20daftar%20pelatihan%20Line%20Follower%20Perlombaan" target="_blank" class="btn btn-ghost btn-lg"><i class="fa-brands fa-whatsapp"></i> Daftar Sekarang</a>
+            </div>
+          </div>
+          <div class="slide-banner-visual">
+            <!-- REPLACE: foto suasana pelatihan/workshop Ichibot -->
+            <img src="https://placehold.co/560x420/111111/333333?text=Pelatihan+LF+Perlombaan"
+                 alt="Pelatihan Line Follower Perlombaan Ichibot" class="slide-banner-img">
+          </div>
+        </div>
+      </div>
+
+      <!-- ─ Slide 4: Achievement ─ -->
+      <div class="hero-slide" aria-hidden="true">
+        <div class="slide-banner">
+          <div class="slide-banner-copy">
+            <div class="section-label">Jejak Sang Juara</div>
+            <h2>Dipercaya di <span class="text-red">17+ Negara</span></h2>
+            <p class="slide-banner-desc">Dari kampus lokal hingga universitas di Eropa dan Asia — robot Ichibot ada di podium teratas dunia kompetisi.</p>
+            <div class="slide-banner-ctas">
+              <a href="blog.html" class="btn btn-red btn-lg">Lihat Semua Pencapaian</a>
+            </div>
+          </div>
+          <div class="slide-achievement-visual">
+            <div class="slide-big-stat">1000<span class="text-red">+</span></div>
+            <div class="slide-big-stat-label">Total Kemenangan</div>
+            <p class="slide-big-stat-sub">Dikumpulkan oleh komunitas pengguna Ichibot di seluruh dunia sejak 2014.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─ Slide 5: Events & Updates ─ -->
+      <div class="hero-slide" aria-hidden="true">
+        <div class="slide-banner">
+          <div class="slide-banner-copy">
+            <div class="section-label">Event Kompetisi Mendatang</div>
+            <h2>Siap <span class="text-red">Berkompetisi?</span></h2>
+            <p class="slide-banner-desc">Jadikan kompetisi berikutnya milikmu. Persiapkan robot Ichibot-mu dan taklukkan podium nasional.</p>
+            <div class="slide-banner-ctas">
+              <a href="events.html" class="btn btn-red btn-lg">Semua Events</a>
+              <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20ingin%20info%20event%20kompetisi%20mendatang" target="_blank" class="btn btn-ghost btn-lg"><i class="fa-brands fa-whatsapp"></i> Tanya Jadwal</a>
+            </div>
+          </div>
+          <div class="slide-event-card">
+            <span class="badge badge-red" style="align-self:flex-start;">Kompetisi Nasional</span>
+            <div class="slide-event-date-row">
+              <span class="slide-event-day-xl">14</span>
+              <span class="slide-event-month-xl">Jun 2026</span>
+            </div>
+            <div class="slide-event-name-xl">Line Follower Contest — ITS Surabaya</div>
+            <div class="slide-event-loc-xl">
+              <i class="fa-solid fa-location-dot" style="color:var(--accent-red);"></i>
+              Institut Teknologi Sepuluh Nopember, Surabaya
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─ Carousel Controls ─ -->
+      <div class="carousel-progress" aria-hidden="true">
+        <div class="carousel-progress-bar" id="carousel-bar"></div>
+      </div>
+
+      <div class="carousel-dots" role="tablist" aria-label="Pilih slide">
+        <button class="carousel-dot active" role="tab" aria-selected="true"  aria-label="Slide 1: Brand"></button>
+        <button class="carousel-dot"        role="tab" aria-selected="false" aria-label="Slide 2: Produk"></button>
+        <button class="carousel-dot"        role="tab" aria-selected="false" aria-label="Slide 3: Pelatihan"></button>
+        <button class="carousel-dot"        role="tab" aria-selected="false" aria-label="Slide 4: Pencapaian"></button>
+        <button class="carousel-dot"        role="tab" aria-selected="false" aria-label="Slide 5: Events"></button>
+      </div>
+
+      <button class="carousel-arrow carousel-prev" aria-label="Slide sebelumnya">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button class="carousel-arrow carousel-next" aria-label="Slide berikutnya">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="stats-bar container reveal">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-value" data-count="17" data-suffix="+">0</span>
+          <span class="stat-label">Negara</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" data-count="500" data-suffix="+">0</span>
+          <span class="stat-label">Pengguna</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" data-count="1000" data-suffix="+">0</span>
+          <span class="stat-label">Kemenangan</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" data-count="10" data-suffix="+">0</span>
+          <span class="stat-label">Tahun Berdiri</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- World Export Map Section -->
+    <section class="section map-section reveal">
+      <div class="container">
+        <div class="section-header section-header--center">
+          <h2 class="section-title">17+ Negara Telah Merasakan Kemenangan Bersama Ichibot</h2>
+          <p class="section-subtitle">Dikirim langsung dari Indonesia ke seluruh dunia</p>
+        </div>
+
+        <div class="map-container">
+          <svg id="world-map-svg" viewBox="0 0 1000 500" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="dotGlow" x="-80%" y="-80%" width="260%" height="260%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+            <!-- Graticule (lat/lng grid) rendered by D3 -->
+            <g id="map-graticule"></g>
+            <!-- Country land masses rendered by D3 -->
+            <g id="map-land"></g>
+            <!-- Export arcs and destination dots rendered by JS -->
+            <g id="map-arcs"></g>
+            <g id="map-dots"></g>
+            <!-- Origin: Yogyakarta — cx/cy set by JS after D3 projection -->
+            <circle id="map-origin-pulse" r="10" cx="0" cy="0" fill="#dc1e1e" class="map-origin-pulse" />
+            <circle id="map-origin-core" r="5" cx="0" cy="0" fill="#ff3333" class="map-origin-core"
+              filter="url(#dotGlow)" aria-label="Yogyakarta, Indonesia" />
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="section reveal">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Produk Unggulan Kami</h2>
+          <a href="products.html" class="section-header-action">Lihat Semua Produk &rarr;</a>
+        </div>
+
+        <div class="product-grid card-grid">
+          <!-- Ultimate 5 Max -->
+          <div class="glass-card product-card reveal reveal-d1">
+            <div class="product-card-image">
+              <!-- REPLACE: Foto robot Ultimate 5 Max tampak depan -->
+              <img src="https://placehold.co/600x400/111111/444444?text=Ultimate+5+Max"
+                alt="Robot Line Follower Ultimate 5 Max Ichibot">
+              <span class="badge badge-red product-card-featured">Bestseller &middot; 17 Negara</span>
+              <span class="badge badge-white product-card-badge">Line Follower</span>
+            </div>
+            <div class="product-card-body">
+              <h3 class="product-card-name">Ultimate 5 Max</h3>
+              <div class="product-card-price">
+                <span class="price-current">Rp 2.339.025</span>
+                <span class="price-original">Rp 2.399.000</span>
+              </div>
+              <ul class="product-card-specs">
+                <li>14 Optic Line Sensor</li>
+                <li>Gyro MPU-6050 &middot; WiFi + BT</li>
+                <li>25mm Motor DC 2500RPM</li>
+              </ul>
+              <div class="product-card-actions">
+                <a href="product-detail.html" class="btn btn-ghost btn-sm">Detail</a>
+                <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20tertarik%20dengan%20Ultimate%205%20Max"
+                  target="_blank" class="btn btn-red btn-sm">Order WhatsApp</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ichiduino Pro -->
+          <div class="glass-card product-card reveal reveal-d2">
+            <div class="product-card-image">
+              <!-- REPLACE: Foto robot Ichiduino Pro -->
+              <img src="https://placehold.co/600x400/111111/444444?text=Ichiduino+Pro"
+                alt="Robot Line Follower Ichiduino Pro Ichibot">
+              <span class="badge badge-white product-card-badge">Line Follower</span>
+            </div>
+            <div class="product-card-body">
+              <h3 class="product-card-name">Ichiduino Pro</h3>
+              <div class="product-card-price">
+                <span class="price-current">Rp 1.949.025</span>
+                <span class="price-original">Rp 1.999.000</span>
+              </div>
+              <ul class="product-card-specs">
+                <li>Atmega 2560</li>
+                <li>12 Optic Line Sensor</li>
+                <li>mBlock + Arduino IDE</li>
+              </ul>
+              <div class="product-card-actions">
+                <a href="products.html" class="btn btn-ghost btn-sm">Detail</a>
+                <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20tertarik%20dengan%20Ichiduino%20Pro"
+                  target="_blank" class="btn btn-red btn-sm">Order WhatsApp</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sumo 1 Kg -->
+          <div class="glass-card product-card reveal reveal-d3">
+            <div class="product-card-image">
+              <!-- REPLACE: Foto robot Sumo 1 Kg -->
+              <img src="https://placehold.co/600x400/111111/444444?text=Sumo+1+Kg" alt="Robot Sumo 1 Kg Ichibot">
+              <span class="badge badge-white product-card-badge">Sumo</span>
+            </div>
+            <div class="product-card-body">
+              <h3 class="product-card-name">Sumo 1 Kg</h3>
+              <div class="product-card-price">
+                <span class="price-current">Rp 2.340.000</span>
+                <span class="price-original">Rp 2.400.000</span>
+              </div>
+              <ul class="product-card-specs">
+                <li>ESP32 &middot; WiFi + BT</li>
+                <li>25mm Motor 500RPM</li>
+                <li>Stall Torque 30kg.cm</li>
+              </ul>
+              <div class="product-card-actions">
+                <a href="products.html" class="btn btn-ghost btn-sm">Detail</a>
+                <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20tertarik%20dengan%20Sumo%201%20Kg"
+                  target="_blank" class="btn btn-red btn-sm">Order WhatsApp</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Transporter Mecanum -->
+          <div class="glass-card product-card reveal reveal-d4">
+            <div class="product-card-image">
+              <!-- REPLACE: Foto robot Transporter Mecanum -->
+              <img src="https://placehold.co/600x400/111111/444444?text=Transporter+Mecanum"
+                alt="Robot Transporter Mecanum Ichibot">
+              <span class="badge badge-white product-card-badge">Transporter</span>
+            </div>
+            <div class="product-card-body">
+              <h3 class="product-card-name">Transporter Mecanum</h3>
+              <div class="product-card-price">
+                <span class="price-current">Rp 3.022.500</span>
+                <span class="price-original">Rp 3.100.000</span>
+              </div>
+              <ul class="product-card-specs">
+                <li>Mecanum 60mm Wheel</li>
+                <li>PS3 Remote</li>
+                <li>Gripper + Elbow + Lifter axis</li>
+              </ul>
+              <div class="product-card-actions">
+                <a href="products.html" class="btn btn-ghost btn-sm">Detail</a>
+                <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20tertarik%20dengan%20Transporter%20Mecanum"
+                  target="_blank" class="btn btn-red btn-sm">Order WhatsApp</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Achievement / News Feed Section -->
+    <section class="section reveal">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Pencapaian Terbaru</h2>
+          <a href="blog.html" class="section-header-action">Lihat Semua &rarr;</a>
+        </div>
+
+        <div class="achievement-grid card-grid">
+          <!-- Card 1 -->
+          <div class="glass-card achievement-card reveal reveal-d1">
+            <div class="achievement-card-image">
+              <!-- REPLACE: Foto pencapaian lomba -->
+              <img src="https://placehold.co/800x500/111111/444444?text=Juara+1+Nasional"
+                alt="Juara 1 Nasional Line Follower">
+            </div>
+            <div class="achievement-card-body">
+              <div class="achievement-card-meta">
+                <span class="badge badge-red">#Juara</span>
+                <span class="achievement-card-date">Okt 2025</span>
+              </div>
+              <h3 class="achievement-card-title">Juara 1 Tingkat Nasional Universitas Brawijaya</h3>
+              <p class="achievement-card-desc">Tim komunitas Ichibot berhasil menyapu bersih podium pada kompetisi Line
+                Follower tingkat nasional.</p>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="glass-card achievement-card reveal reveal-d2">
+            <div class="achievement-card-image">
+              <!-- REPLACE: Foto milestone ekspor -->
+              <img src="https://placehold.co/800x500/111111/444444?text=Ekspor+ke+Jerman"
+                alt="Ekspor Ultimate 5 Max ke Jerman">
+            </div>
+            <div class="achievement-card-body">
+              <div class="achievement-card-meta">
+                <span class="badge badge-white">#Ekspor</span>
+                <span class="achievement-card-date">Sep 2025</span>
+              </div>
+              <h3 class="achievement-card-title">Ultimate 5 Max Tembus Pasar Jerman</h3>
+              <p class="achievement-card-desc">Pengiriman kloter pertama Ultimate 5 Max ke universitas di Jerman,
+                menambah daftar 17 negara.</p>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="glass-card achievement-card reveal reveal-d3">
+            <div class="achievement-card-image">
+              <!-- REPLACE: Foto kegiatan komunitas -->
+              <img src="https://placehold.co/800x500/111111/444444?text=Kopdar+Komunitas"
+                alt="Kopdar Komunitas Ichibot">
+            </div>
+            <div class="achievement-card-body">
+              <div class="achievement-card-meta">
+                <span class="badge badge-gray">#Komunitas</span>
+                <span class="achievement-card-date">Agu 2025</span>
+              </div>
+              <h3 class="achievement-card-title">Kopdar Nasional 500+ Pengguna</h3>
+              <p class="achievement-card-desc">Berkumpul bersama saling berbagi ilmu setting robot dan strategi lintasan
+                untuk persiapan musim kompetisi.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Pelatihan Preview -->
+    <section class="section bg-secondary reveal">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="section-label">Tingkatkan Skill</div>
+            <h2 class="section-title">Program Pelatihan</h2>
+            <p class="section-subtitle">Belajar langsung dari para juara.</p>
+          </div>
+          <a href="pelatihan.html" class="section-header-action">Lihat Semua Program &rarr;</a>
+        </div>
+
+        <div class="product-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+
+          <div class="glass-card product-card reveal-d1">
+            <div class="product-card-body"
+              style="padding-top: 32px; height: 100%; display: flex; flex-direction: column;">
+              <div style="font-size: 2.5rem; color: var(--accent-red); margin-bottom: 16px;"><i
+                  class="fa-solid fa-graduation-cap"></i></div>
+              <h3 class="product-card-name">Line Follower Dasar</h3>
+              <p class="text-secondary" style="margin-bottom: 24px; font-size: 0.95rem;">Pengenalan komponen, logika
+                dasar mikrokontroler, dan tuning PID dasar untuk pemula.</p>
+              <div class="product-card-actions" style="margin-top: auto;">
+                <a href="pelatihan.html" class="btn btn-ghost btn-sm" style="width: 100%;">Lihat Detail Program</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card product-card reveal-d2">
+            <div class="product-card-body"
+              style="padding-top: 32px; height: 100%; display: flex; flex-direction: column;">
+              <div style="font-size: 2.5rem; color: var(--accent-red); margin-bottom: 16px;"><i
+                  class="fa-solid fa-trophy"></i></div>
+              <h3 class="product-card-name">Line Follower Perlombaan</h3>
+              <p class="text-secondary" style="margin-bottom: 24px; font-size: 0.95rem;">Strategi mapping jalur ekstrem,
+                advanced tuning PID, dan trik memenangkan kompetisi tingkat nasional.</p>
+              <div class="product-card-actions" style="margin-top: auto;">
+                <a href="pelatihan.html" class="btn btn-ghost btn-sm" style="width: 100%;">Lihat Detail Program</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card product-card reveal-d3">
+            <div class="product-card-body"
+              style="padding-top: 32px; height: 100%; display: flex; flex-direction: column;">
+              <div style="font-size: 2.5rem; color: var(--accent-red); margin-bottom: 16px;"><i
+                  class="fa-solid fa-microchip"></i></div>
+              <h3 class="product-card-name">MyRIO & Omni-directional</h3>
+              <p class="text-secondary" style="margin-bottom: 24px; font-size: 0.95rem;">Pengoperasian National
+                Instruments MyRIO, object management, dan simulasi.</p>
+              <div class="product-card-actions" style="margin-top: auto;">
+                <a href="pelatihan.html" class="btn btn-ghost btn-sm" style="width: 100%;">Lihat Detail Program</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Events Updates Section -->
+    <section class="section bg-secondary reveal">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <div class="section-label">Kalender Kompetisi</div>
+            <h2 class="section-title">Events &amp; Updates</h2>
+            <p class="section-subtitle">Kompetisi mendatang dan update terbaru dari dunia robotika.</p>
+          </div>
+          <a href="events.html" class="section-header-action">Lihat Semua &rarr;</a>
+        </div>
+
+        <div class="events-grid">
+
+          <!-- Event 1 -->
+          <div class="glass-card event-card reveal reveal-d1">
+            <div class="event-card-date">
+              <span class="event-day">14</span>
+              <span class="event-month">Jun</span>
+            </div>
+            <div class="event-card-body">
+              <span class="badge badge-red">Kompetisi</span>
+              <h3 class="event-card-title">Line Follower Contest — ITS Surabaya</h3>
+              <a href="event-its.html" class="btn btn-ghost btn-sm" style="margin-top: 12px;">Detail Event</a>
+              <p class="event-card-meta"><i class="fa-solid fa-location-dot"></i> Institut Teknologi Sepuluh Nopember
+              </p>
+              <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20ingin%20info%20lomba%20ITS%20Surabaya"
+                target="_blank" class="btn btn-ghost btn-sm" style="margin-top: 12px;">Daftar &amp; Konsultasi</a>
+            </div>
+          </div>
+
+          <!-- Event 2 -->
+          <div class="glass-card event-card reveal reveal-d2">
+            <div class="event-card-date">
+              <span class="event-day">22</span>
+              <span class="event-month">Jun</span>
+            </div>
+            <div class="event-card-body">
+              <span class="badge badge-white">Workshop</span>
+              <h3 class="event-card-title">Workshop Tuning PID — Ichibot Yogyakarta</h3>
+              <a href="event-workshop-pid.html" class="btn btn-ghost btn-sm" style="margin-top: 12px;">Detail Event</a>
+              <p class="event-card-meta"><i class="fa-solid fa-location-dot"></i> Workshop Ichibot, Sleman</p>
+              <a href="pelatihan.html" class="btn btn-ghost btn-sm" style="margin-top: 12px;">Lihat Program</a>
+            </div>
+          </div>
+
+          <!-- Event 3 -->
+          <div class="glass-card event-card reveal reveal-d3">
+            <div class="event-card-date">
+              <span class="event-day">05</span>
+              <span class="event-month">Jul</span>
+            </div>
+            <div class="event-card-body">
+              <span class="badge badge-red">Kompetisi</span>
+              <h3 class="event-card-title">Robot Contest Nasional — Universitas Brawijaya</h3>
+              <a href="event-ub.html" class="btn btn-ghost btn-sm" style="margin-top: 12px;">Detail Event</a>
+              <p class="event-card-meta"><i class="fa-solid fa-location-dot"></i> Universitas Brawijaya, Malang</p>
+              <a href="https://wa.me/6281234567890?text=Halo%20Ichibot%2C%20saya%20ingin%20info%20lomba%20UB%20Malang"
+                target="_blank" class="btn btn-ghost btn-sm" style="margin-top: 12px;">Daftar &amp; Konsultasi</a>
+            </div>
+          </div>
+
+          <!-- Event 4 -->
+          <div class="glass-card event-card reveal reveal-d4">
+            <div class="event-card-date">
+              <span class="event-day">19</span>
+              <span class="event-month">Jul</span>
+            </div>
+            <div class="event-card-body">
+              <span class="badge badge-gray">Update</span>
+              <h3 class="event-card-title">Firmware Ultimate 5 Max v3.2 — OTA Release</h3>
+              <p class="event-card-meta"><i class="fa-solid fa-microchip"></i> Tersedia via WiFi Update</p>
+              <a href="product-detail.html" class="btn btn-ghost btn-sm" style="margin-top: 12px;">Detail Produk</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="footer-logo-text"><span>I</span>CHIBOT</div>
+          <p class="footer-tagline">Mendemokratisasi robotika kompetitif di Indonesia. Dari Yogyakarta ke seluruh dunia.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Navigasi</h4>
+          <div class="footer-links">
+            <a href="index.html">Beranda</a>
+            <a href="products.html">Produk</a>
+            <a href="pelatihan.html">Pelatihan</a>
+            <a href="blog.html">Blog</a>
+            <a href="events.html">Events</a>
+            <a href="community.html">Komunitas</a>
+            <a href="about.html">Tentang Kami</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Kategori Produk</h4>
+          <div class="footer-links">
+            <a href="products.html">Line Follower</a>
+            <a href="products.html">Sumo</a>
+            <a href="products.html">Transporter</a>
+            <a href="products.html">MyRIO</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Official Store</h4>
+          <div class="footer-marketplaces">
+            <a href="#" class="marketplace-link" target="_blank">
+              <i class="fa-solid fa-bag-shopping"></i> Shopee
+            </a>
+            <a href="#" class="marketplace-link" target="_blank">
+              <i class="fa-solid fa-store"></i> Tokopedia
+            </a>
+            <a href="#" class="marketplace-link" target="_blank">
+              <i class="fa-brands fa-tiktok"></i> TikTok Shop
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-copy">&copy; <span class="current-year"></span> Ichibot Robotics. Yogyakarta, Indonesia.
+        </div>
+        <div class="footer-social">
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- D3 + world-atlas for the export map (index.html only) -->
+  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+  <script src="js/main.js"></script>
+
+  <!-- Hero Carousel -->
+  <script>
+  (function () {
+    'use strict';
+
+    const carousel   = document.querySelector('.hero-carousel');
+    if (!carousel) return;
+
+    const slides     = Array.from(carousel.querySelectorAll('.hero-slide'));
+    const dots       = Array.from(carousel.querySelectorAll('.carousel-dot'));
+    const bar        = carousel.querySelector('#carousel-bar');
+    const prevBtn    = carousel.querySelector('.carousel-prev');
+    const nextBtn    = carousel.querySelector('.carousel-next');
+
+    const INTERVAL   = 5000;   // ms per slide
+    const FPS        = 60;
+    const STEP       = 100 / (INTERVAL / (1000 / FPS)); // % per frame
+
+    let current      = 0;
+    let barWidth     = 0;
+    let rafId        = null;
+    let paused       = false;
+
+    function goTo(index) {
+      // Deactivate current
+      slides[current].classList.remove('active');
+      slides[current].setAttribute('aria-hidden', 'true');
+      dots[current].classList.remove('active');
+      dots[current].setAttribute('aria-selected', 'false');
+
+      current = (index + slides.length) % slides.length;
+
+      // Activate new
+      slides[current].classList.add('active');
+      slides[current].setAttribute('aria-hidden', 'false');
+      dots[current].classList.add('active');
+      dots[current].setAttribute('aria-selected', 'true');
+
+      // Reset progress bar
+      barWidth = 0;
+      if (bar) bar.style.width = '0%';
+    }
+
+    function tick() {
+      if (!paused) {
+        barWidth += STEP;
+        if (bar) bar.style.width = barWidth + '%';
+        if (barWidth >= 100) {
+          goTo(current + 1);
+        }
+      }
+      rafId = requestAnimationFrame(tick);
+    }
+
+    // Dot clicks
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => { goTo(i); });
+    });
+
+    // Arrow clicks
+    if (prevBtn) prevBtn.addEventListener('click', () => { goTo(current - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', () => { goTo(current + 1); });
+
+    // Pause on hover / focus, resume on leave
+
+    // Keyboard: left/right arrows
+    carousel.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft')  { goTo(current - 1); }
+      if (e.key === 'ArrowRight') { goTo(current + 1); }
+    });
+
+    // Touch swipe
+    let touchStartX = 0;
+    carousel.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    carousel.addEventListener('touchend', (e) => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 40) { goTo(dx < 0 ? current + 1 : current - 1); }
+    }, { passive: true });
+
+    // Start
+    rafId = requestAnimationFrame(tick);
+  })();
+  </script>
+</body>
+
+</html>
