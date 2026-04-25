@@ -1,0 +1,34 @@
+name: Deploy to cPanel via FTP
+
+on:
+  push:
+    branches:
+      - main # Jalankan otomatis jika ada push ke branch main
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # Optimasi untuk action ftp-deploy
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # Exclude folder/file yang tidak perlu diupload ke server public_html
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            package.json
+            package-lock.json
+            admin.js
+            admin.html
+            *.py
+            *.md
