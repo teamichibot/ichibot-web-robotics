@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/u5157870/public_html/
+    - export DEPLOYPATH=/home/u5157870/robotics.ichibot.id/
     - /bin/cp -R * $DEPLOYPATH
