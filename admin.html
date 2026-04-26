@@ -510,6 +510,14 @@
               <!-- Produk / Pelatihan -->
               <div id="pf" style="display:none;">
                 <div class="editor-card" style="margin-bottom:16px;">
+                  <div class="editor-card-title">Label Produk</div>
+                  <div class="fg">
+                    <label class="flabel">Kategori / Label</label>
+                    <input type="text" class="fc" id="f-product-label" placeholder="Line Follower / Sumo / Transporter / MyRIO">
+                    <div class="fhint">Muncul sebagai badge di foto produk</div>
+                  </div>
+                </div>
+                <div class="editor-card" style="margin-bottom:16px;">
                   <div class="editor-card-title">Harga</div>
                   <div class="frow">
                     <div class="fg">
@@ -859,13 +867,14 @@
       ['pf','bf','ef'].forEach(id => $(id).style.display = 'none');
 
       if (d.type === 'products' || d.type === 'pelatihan') {
-        $('pf').style.display   = '';
-        $('f-price').value      = d.price || '';
-        $('f-price-coret').value= d.price_coret || '';
-        $('f-desc').value       = d.description || '';
-        $('f-wa').value         = d.whatsapp_text || '';
-        $('f-specs1').value     = (d.specs1 || []).join('\n');
-        $('f-specs2').value     = (d.specs2 || []).join('\n');
+        $('pf').style.display        = '';
+        $('f-product-label').value   = d.badge || '';
+        $('f-price').value           = d.price || '';
+        $('f-price-coret').value     = d.price_coret || '';
+        $('f-desc').value            = d.description || '';
+        $('f-wa').value              = d.whatsapp_text || '';
+        $('f-specs1').value          = (d.specs1 || []).join('\n');
+        $('f-specs2').value          = (d.specs2 || []).join('\n');
       } else if (d.type === 'blog') {
         $('bf').style.display = '';
         $('f-badge').value = d.badge || '';
@@ -908,6 +917,7 @@
 
       if (type === 'products' || type === 'pelatihan') {
         Object.assign(payload, {
+          badge:        $('f-product-label').value,
           price:        $('f-price').value,
           price_coret:  $('f-price-coret').value,
           description:  $('f-desc').value,

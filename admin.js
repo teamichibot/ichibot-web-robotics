@@ -166,6 +166,8 @@ app.get('/api/page', (req, res) => {
             } catch(e) {}
         }
 
+        data.badge = $('.detail-image-wrap .badge').text().trim();
+
         data.specs1 = []; data.specs2 = [];
         const ulElements = $('ul.spec-list');
         if (ulElements.length > 0) $(ulElements[0]).find('li').each((i, el) => data.specs1.push($(el).text().trim()));
@@ -208,6 +210,7 @@ app.post('/api/page', (req, res) => {
     if (data.image) $('.detail-image-wrap img').attr('src', data.image);
 
     if (data.type === 'products' || data.type === 'pelatihan') {
+        if (data.badge !== undefined) $('.detail-image-wrap .badge').text(data.badge);
         if (data.price !== undefined) $('.detail-price').text(data.price);
         if (data.price_coret !== undefined) $('.detail-price-coret').text(data.price_coret);
         if (data.description) $('.detail-desc-text').first().text(data.description);
