@@ -1,354 +1,1030 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ichibot Admin Panel</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-    <style>
-        body { background-color: #f8f9fa; }
-        .sidebar { min-height: 100vh; background: #343a40; color: white; padding-top: 20px;}
-        .sidebar a { color: #adb5bd; text-decoration: none; padding: 10px 20px; display: block; }
-        .sidebar a:hover, .sidebar a.active { color: white; background: #495057; }
-        .content { padding: 20px; }
-        .file-list { max-height: 80vh; overflow-y: auto; }
-        .list-group-item { cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-        .list-group-item:hover { background-color: #e9ecef; }
-        .list-group-item.active { background-color: #0d6efd; border-color: #0d6efd; color: white;}
-        .btn-delete { color: #dc3545; background: none; border: none; padding: 0; font-size: 1.2rem; line-height: 1; }
-        .list-group-item.active .btn-delete { color: #ffc107; }
-        .btn-delete:hover { color: #bd2130; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel — Ichibot Robotics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.snow.css">
+  <style>
+    /* Override Quill snow theme to match dark admin UI */
+    .ql-toolbar.ql-snow {
+      background: var(--bg-3);
+      border: 1px solid var(--border) !important;
+      border-bottom: none !important;
+      border-radius: var(--r) var(--r) 0 0;
+    }
+    .ql-container.ql-snow {
+      background: var(--bg-3);
+      border: 1px solid var(--border) !important;
+      border-radius: 0 0 var(--r) var(--r);
+      font-family: var(--font-b);
+      font-size: 0.87rem;
+      color: var(--text);
+      min-height: 400px;
+    }
+    .ql-toolbar.ql-snow .ql-stroke { stroke: var(--text-2); }
+    .ql-toolbar.ql-snow .ql-fill  { fill:   var(--text-2); }
+    .ql-toolbar.ql-snow .ql-picker-label { color: var(--text-2); }
+    .ql-toolbar.ql-snow button:hover .ql-stroke,
+    .ql-toolbar.ql-snow button.ql-active .ql-stroke { stroke: var(--red-light); }
+    .ql-toolbar.ql-snow button:hover .ql-fill,
+    .ql-toolbar.ql-snow button.ql-active .ql-fill   { fill: var(--red-light); }
+    .ql-toolbar.ql-snow .ql-picker-label:hover { color: var(--red-light); }
+    .ql-editor { min-height: 380px; color: var(--text); line-height: 1.6; }
+    .ql-editor.ql-blank::before { color: var(--text-3); font-style: normal; }
+    .ql-snow .ql-tooltip { background: var(--bg-2); border-color: var(--border); color: var(--text); box-shadow: none; }
+    .ql-snow .ql-tooltip input[type=text] { background: var(--bg-3); border-color: var(--border); color: var(--text); }
+    .ql-snow .ql-tooltip a.ql-action,
+    .ql-snow .ql-tooltip a.ql-remove { color: var(--red-light); }
+    .ql-picker-options { background: var(--bg-2) !important; border-color: var(--border) !important; }
+    .ql-picker-item { color: var(--text-2) !important; }
+    .ql-picker-item:hover { color: var(--text) !important; }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #0a0a0a;
+      --bg-2:        #0f0f0f;
+      --bg-3:        #151515;
+      --sidebar-bg:  #070707;
+      --glass:       rgba(255,255,255,0.04);
+      --glass-h:     rgba(255,255,255,0.07);
+      --border:      rgba(255,255,255,0.08);
+      --border-s:    rgba(255,255,255,0.05);
+      --border-red:  rgba(220,30,30,0.3);
+      --text:        #f0f0f0;
+      --text-2:      #999;
+      --text-3:      #555;
+      --red:         #dc1e1e;
+      --red-h:       #b81818;
+      --red-light:   #ff5555;
+      --red-glow:    rgba(220,30,30,0.12);
+      --green:       #22c55e;
+      --amber:       #f59e0b;
+      --font-d:      'Rajdhani', sans-serif;
+      --font-b:      'DM Sans', system-ui, sans-serif;
+      --r:           8px;
+      --r-lg:        12px;
+      --r-xl:        16px;
+      --sidebar-w:   224px;
+      --topbar-h:    60px;
+      --ease:        cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html, body { height: 100%; background: var(--bg); color: var(--text); font-family: var(--font-b); overflow: hidden; font-size: 14px; }
+
+    /* ── Sidebar ──────────────────────────────────────── */
+    .admin-sidebar {
+      position: fixed; left: 0; top: 0; bottom: 0;
+      width: var(--sidebar-w);
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--border-s);
+      display: flex; flex-direction: column;
+      z-index: 100;
+    }
+
+    .sidebar-logo {
+      padding: 18px 18px 14px;
+      border-bottom: 1px solid var(--border-s);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .sidebar-logo-mark {
+      width: 32px; height: 32px;
+      background: var(--red);
+      border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-d); font-weight: 800; font-size: 1rem; color: #fff;
+      flex-shrink: 0;
+    }
+    .sidebar-logo-name {
+      font-family: var(--font-d); font-weight: 700; font-size: 0.95rem;
+      color: var(--text); letter-spacing: 0.03em;
+      line-height: 1.1;
+    }
+    .sidebar-logo-sub { font-size: 0.65rem; color: var(--text-3); letter-spacing: 0.08em; }
+
+    .sidebar-nav { flex: 1; padding: 10px 0; overflow-y: auto; }
+
+    .nav-label {
+      font-size: 0.62rem; font-weight: 600; letter-spacing: 0.13em;
+      text-transform: uppercase; color: var(--text-3);
+      padding: 12px 18px 5px;
+    }
+    .nav-btn {
+      display: flex; align-items: center; gap: 10px;
+      width: 100%; padding: 9px 18px;
+      background: none; border: none; border-left: 2px solid transparent;
+      color: var(--text-2); font-family: var(--font-b); font-size: 0.875rem;
+      cursor: pointer; text-align: left;
+      transition: color 0.18s, background 0.18s, border-color 0.18s;
+    }
+    .nav-btn i { width: 15px; text-align: center; font-size: 0.8rem; opacity: 0.8; }
+    .nav-btn:hover { color: var(--text); background: var(--glass); }
+    .nav-btn.active {
+      color: var(--text); background: var(--red-glow);
+      border-left-color: var(--red);
+    }
+    .nav-btn.active i { opacity: 1; color: var(--red-light); }
+    .n-count {
+      margin-left: auto; background: var(--glass); border-radius: 99px;
+      padding: 1px 7px; font-size: 0.7rem; color: var(--text-3);
+    }
+    .nav-btn.active .n-count { background: rgba(220,30,30,0.18); color: var(--red-light); }
+
+    .sidebar-footer { padding: 14px; border-top: 1px solid var(--border-s); }
+    .sidebar-user {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 6px; margin-bottom: 4px;
+    }
+    .s-avatar {
+      width: 28px; height: 28px;
+      background: var(--red-glow); border: 1px solid var(--border-red); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; color: var(--red-light);
+    }
+    .s-username { font-size: 0.82rem; color: var(--text-2); }
+    .s-link {
+      display: flex; align-items: center; gap: 8px;
+      padding: 7px 6px; border-radius: var(--r);
+      font-size: 0.8rem; color: var(--text-3);
+      text-decoration: none; transition: color 0.18s;
+    }
+    .s-link:hover { color: var(--text-2); }
+    .logout-btn {
+      display: flex; align-items: center; gap: 8px;
+      width: 100%; padding: 7px 6px; background: none; border: none;
+      color: var(--text-3); font-size: 0.8rem; cursor: pointer;
+      border-radius: var(--r); transition: color 0.18s, background 0.18s;
+    }
+    .logout-btn:hover { color: var(--red-light); background: rgba(220,30,30,0.07); }
+
+    /* ── Main shell ───────────────────────────────────── */
+    .admin-main {
+      margin-left: var(--sidebar-w);
+      height: 100vh;
+      display: flex; flex-direction: column; overflow: hidden;
+    }
+
+    .admin-topbar {
+      height: var(--topbar-h);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px;
+      border-bottom: 1px solid var(--border-s);
+      background: var(--bg); flex-shrink: 0;
+    }
+    .topbar-left { display: flex; align-items: center; gap: 12px; }
+    #page-title { font-family: var(--font-d); font-size: 1.2rem; font-weight: 600; }
+    .topbar-right { display: flex; align-items: center; gap: 8px; }
+    .topbar-sep { color: var(--text-3); font-size: 0.9rem; }
+    .topbar-breadcrumb { font-size: 0.875rem; color: var(--text-2); max-width: 320px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    .admin-content { flex: 1; overflow-y: auto; padding: 24px; }
+
+    /* ── Buttons ──────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 7px 14px; border: none; border-radius: var(--r);
+      font-size: 0.83rem; font-weight: 500; cursor: pointer;
+      font-family: var(--font-b); transition: all 0.18s; text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn-primary { background: var(--red); color: #fff; }
+    .btn-primary:hover { background: var(--red-h); }
+    .btn-ghost {
+      background: var(--glass); border: 1px solid var(--border);
+      color: var(--text-2);
+    }
+    .btn-ghost:hover { background: var(--glass-h); color: var(--text); }
+    .btn-danger {
+      background: rgba(220,30,30,0.1); border: 1px solid var(--border-red);
+      color: var(--red-light);
+    }
+    .btn-danger:hover { background: rgba(220,30,30,0.2); }
+    .btn-icon { width: 30px; height: 30px; padding: 0; justify-content: center; }
+    .btn-sm { padding: 5px 10px; font-size: 0.77rem; }
+
+    /* ── Dashboard ────────────────────────────────────── */
+    .dash-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 28px; }
+    .stat-card {
+      background: var(--glass); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 18px 20px;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .stat-card:hover { background: var(--glass-h); border-color: var(--border-red); transform: translateY(-1px); }
+    .stat-icon { font-size: 1rem; color: var(--red); margin-bottom: 10px; }
+    .stat-num { font-family: var(--font-d); font-size: 2rem; font-weight: 700; line-height: 1; margin-bottom: 4px; }
+    .stat-label { font-size: 0.78rem; color: var(--text-2); }
+
+    .dash-section-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-3); margin-bottom: 12px; }
+    .dash-quick { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    /* ── Content list ─────────────────────────────────── */
+    .list-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .list-count { font-size: 0.8rem; color: var(--text-2); }
+
+    .content-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+
+    .c-card {
+      background: var(--glass); border: 1px solid var(--border);
+      border-radius: var(--r-lg); overflow: hidden;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .c-card:hover { background: var(--glass-h); border-color: rgba(255,255,255,0.13); }
+    .c-card-thumb {
+      aspect-ratio: 16/9; overflow: hidden;
+      background: var(--bg-3); position: relative;
+    }
+    .c-card-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
+    .c-card:hover .c-card-thumb img { transform: scale(1.04); }
+    .c-card-body { padding: 12px 14px; }
+    .c-card-title {
+      font-family: var(--font-d); font-size: 0.92rem; font-weight: 600;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      margin-bottom: 4px;
+    }
+    .c-card-file { font-size: 0.7rem; color: var(--text-3); margin-bottom: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .c-card-actions { display: flex; gap: 5px; }
+
+    /* ── Full-page Editor ─────────────────────────────── */
+    .editor-layout {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 20px;
+      align-items: start;
+    }
+    .editor-main { display: flex; flex-direction: column; gap: 16px; }
+    .editor-side { position: sticky; top: 0; }
+
+    .editor-card {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 20px 22px;
+    }
+    .editor-card-title {
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--text-3);
+      padding-bottom: 12px; margin-bottom: 14px;
+      border-bottom: 1px solid var(--border-s);
+    }
+
+    /* ── Form ─────────────────────────────────────────── */
+    .fsec { margin-bottom: 22px; }
+    .fsec-title {
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--text-3);
+      padding-bottom: 8px; margin-bottom: 12px;
+      border-bottom: 1px solid var(--border-s);
+    }
+    .fg { margin-bottom: 12px; }
+    .flabel { display: block; font-size: 0.78rem; color: var(--text-2); margin-bottom: 5px; font-weight: 500; }
+    .fc {
+      width: 100%; padding: 8px 11px;
+      background: var(--bg-3); border: 1px solid var(--border);
+      border-radius: var(--r); color: var(--text);
+      font-size: 0.85rem; font-family: var(--font-b);
+      outline: none; transition: border-color 0.18s;
+    }
+    .fc:focus { border-color: rgba(220,30,30,0.45); }
+    .fc::placeholder { color: var(--text-3); }
+    textarea.fc { resize: vertical; min-height: 72px; }
+    .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .fhint { font-size: 0.69rem; color: var(--text-3); margin-top: 4px; }
+    .img-preview {
+      aspect-ratio: 16/9; background: var(--bg-3);
+      border: 1px solid var(--border); border-radius: var(--r);
+      overflow: hidden; margin-top: 6px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .img-preview img { width: 100%; height: 100%; object-fit: cover; display: none; }
+    .img-preview-placeholder { font-size: 0.75rem; color: var(--text-3); text-align: center; }
+
+    /* ── Modal ────────────────────────────────────────── */
+    .modal-bg {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.65); backdrop-filter: blur(4px);
+      z-index: 300; display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.22s;
+    }
+    .modal-bg.show { opacity: 1; pointer-events: auto; }
+    .modal-box {
+      background: var(--bg-2); border: 1px solid var(--border);
+      border-radius: var(--r-xl); padding: 26px; width: 100%; max-width: 420px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.65);
+      transform: scale(0.95) translateY(6px);
+      transition: transform 0.22s var(--ease);
+    }
+    .modal-bg.show .modal-box { transform: scale(1) translateY(0); }
+    .modal-title { font-family: var(--font-d); font-size: 1.1rem; font-weight: 600; margin-bottom: 18px; }
+    .modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 18px; }
+
+    .confirm-box { max-width: 360px; }
+    .confirm-text { font-size: 0.875rem; color: var(--text-2); line-height: 1.55; }
+
+    /* ── Toast ────────────────────────────────────────── */
+    .toasts {
+      position: fixed; bottom: 20px; right: 20px;
+      z-index: 500; display: flex; flex-direction: column; gap: 7px;
+    }
+    .toast {
+      background: var(--bg-2); border: 1px solid var(--border);
+      border-radius: var(--r); padding: 11px 15px;
+      font-size: 0.83rem; min-width: 240px;
+      display: flex; align-items: center; gap: 9px;
+      animation: tIn 0.28s var(--ease); transition: opacity 0.25s, transform 0.25s;
+    }
+    .toast.success { border-left: 3px solid var(--green); }
+    .toast.error   { border-left: 3px solid var(--red); }
+    .toast.success i { color: var(--green); }
+    .toast.error   i { color: var(--red-light); }
+    @keyframes tIn { from { opacity: 0; transform: translateX(16px); } to { opacity: 1; transform: none; } }
+
+    /* ── Misc ─────────────────────────────────────────── */
+    .loader { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 60px; color: var(--text-3); font-size: 0.85rem; }
+    .spinner { width: 16px; height: 16px; border: 2px solid var(--border); border-top-color: var(--red); border-radius: 50%; animation: spin 0.65s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .empty-state { text-align: center; padding: 56px 20px; color: var(--text-3); }
+    .empty-state i { font-size: 2rem; display: block; margin-bottom: 12px; }
+    .empty-state p { font-size: 0.85rem; }
+
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.07); border-radius: 99px; }
+  </style>
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Sidebar -->
-            <div class="col-md-2 sidebar">
-                <h4 class="text-center mb-4">Ichibot Admin</h4>
-                <a href="#" class="active" onclick="loadFiles('products')">Produk</a>
-                <a href="#" onclick="loadFiles('pelatihan')">Pelatihan</a>
-                <a href="#" onclick="loadFiles('blog')">Blog (Pencapaian)</a>
-                <a href="#" onclick="loadFiles('events')">Events</a>
-            </div>
 
-            <!-- Content Area -->
-            <div class="col-md-3 pt-4 border-end">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="m-0">Daftar Halaman</h5>
-                    <button class="btn btn-sm btn-success" onclick="openCreateModal()">+ Tambah</button>
-                </div>
-                <div class="file-list list-group" id="file-list">
-                    <!-- Files -->
-                </div>
-            </div>
-
-            <div class="col-md-7 content pt-4">
-                <h4 id="editor-title">Pilih halaman untuk diedit</h4>
-                <div id="editor-container" style="display:none;">
-                    <form id="edit-form">
-                        <input type="hidden" id="file-name">
-                        <input type="hidden" id="page-type">
-                        
-                        <div class="mb-3">
-                            <label class="form-label">Judul Halaman</label>
-                            <input type="text" class="form-control" id="title" required>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label class="form-label">Image URL</label>
-                            <input type="text" class="form-control" id="image">
-                        </div>
-
-                        <!-- Product & Event -->
-                        <div id="product-fields" style="display:none;">
-                            <div class="row mb-3">
-                                <div class="col">
-                                    <label class="form-label">Harga (Opsional)</label>
-                                    <input type="text" class="form-control" id="price">
-                                </div>
-                                <div class="col">
-                                    <label class="form-label">Harga Coret (Opsional)</label>
-                                    <input type="text" class="form-control" id="price_coret">
-                                </div>
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label class="form-label">Deskripsi Singkat</label>
-                                <textarea class="form-control" id="description" rows="3"></textarea>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Teks WhatsApp</label>
-                                <input type="text" class="form-control" id="whatsapp_text">
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col">
-                                    <label class="form-label">Spesifikasi Kolom 1 (Pisahkan dengan baris baru)</label>
-                                    <textarea class="form-control" id="specs1" rows="5"></textarea>
-                                </div>
-                                <div class="col">
-                                    <label class="form-label">Spesifikasi Kolom 2 (Pisahkan dengan baris baru)</label>
-                                    <textarea class="form-control" id="specs2" rows="5"></textarea>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Blog -->
-                        <div id="blog-fields" style="display:none;">
-                            <div class="mb-3">
-                                <label class="form-label">Badge / Kategori / Tanggal</label>
-                                <input type="text" class="form-control" id="badge">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Konten Artikel</label>
-                                <textarea id="blog-content"></textarea>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary mt-3">Simpan Perubahan</button>
-                    </form>
-                    <div id="alert-msg" class="mt-3"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Create Modal -->
-    <div class="modal fade" id="createModal" tabindex="-1">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Tambah Halaman Baru</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-          </div>
-          <div class="modal-body">
-            <form id="create-form">
-              <div class="mb-3">
-                <label class="form-label">Kategori</label>
-                <input type="text" class="form-control" id="create-category" readonly>
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Nama File (harus berakhiran .html)</label>
-                <div class="input-group">
-                  <span class="input-group-text" id="file-prefix"></span>
-                  <input type="text" class="form-control" id="create-filename" placeholder="nama-baru.html" required>
-                </div>
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Judul Utama</label>
-                <input type="text" class="form-control" id="create-title" required>
-              </div>
-              <button type="submit" class="btn btn-success w-100">Buat Halaman</button>
-            </form>
-          </div>
-        </div>
+  <!-- ═══ Sidebar ══════════════════════════════════════ -->
+  <aside class="admin-sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-mark">I</div>
+      <div>
+        <div class="sidebar-logo-name">ICHIBOT</div>
+        <div class="sidebar-logo-sub">Admin Panel</div>
       </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        let allPages = {};
-        let currentCategory = 'products';
-        let createModal;
+    <nav class="sidebar-nav">
+      <div class="nav-label">Menu Utama</div>
+      <button class="nav-btn active" data-view="dashboard">
+        <i class="fa-solid fa-house-chimney"></i> Dashboard
+      </button>
+      <button class="nav-btn" data-view="products">
+        <i class="fa-solid fa-robot"></i> Produk
+        <span class="n-count" id="count-products">—</span>
+      </button>
+      <button class="nav-btn" data-view="pelatihan">
+        <i class="fa-solid fa-graduation-cap"></i> Pelatihan
+        <span class="n-count" id="count-pelatihan">—</span>
+      </button>
+      <button class="nav-btn" data-view="blog">
+        <i class="fa-solid fa-trophy"></i> Pencapaian
+        <span class="n-count" id="count-blog">—</span>
+      </button>
+      <button class="nav-btn" data-view="events">
+        <i class="fa-solid fa-calendar-days"></i> Events
+        <span class="n-count" id="count-events">—</span>
+      </button>
+    </nav>
 
-        tinymce.init({
-            selector: '#blog-content',
-            height: 400,
-            plugins: 'lists link image code',
-            toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | link image | code'
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="s-avatar"><i class="fa-solid fa-user" style="font-size:0.6rem;"></i></div>
+        <span class="s-username">admin</span>
+      </div>
+      <a href="index.html" target="_blank" class="s-link">
+        <i class="fa-solid fa-arrow-up-right-from-square"></i> Lihat Website
+      </a>
+      <button class="logout-btn" onclick="window.location.href='/logout'">
+        <i class="fa-solid fa-right-from-bracket"></i> Logout
+      </button>
+    </div>
+  </aside>
+
+  <!-- ═══ Main ══════════════════════════════════════════ -->
+  <main class="admin-main">
+    <header class="admin-topbar">
+      <!-- Default mode (dashboard + list) -->
+      <div class="topbar-left" id="topbar-default-left">
+        <h1 id="page-title">Dashboard</h1>
+      </div>
+      <div class="topbar-right" id="topbar-default-right">
+        <button class="btn btn-ghost btn-sm btn-icon" id="refresh-btn" title="Refresh">
+          <i class="fa-solid fa-arrows-rotate"></i>
+        </button>
+        <button class="btn btn-primary" id="add-btn" style="display:none;">
+          <i class="fa-solid fa-plus"></i> Tambah
+        </button>
+      </div>
+      <!-- Editor mode -->
+      <div class="topbar-left" id="topbar-editor-left" style="display:none;">
+        <button class="btn btn-ghost btn-sm" id="back-btn">
+          <i class="fa-solid fa-arrow-left"></i> Kembali
+        </button>
+        <span class="topbar-sep">/</span>
+        <span id="editor-breadcrumb" class="topbar-breadcrumb"></span>
+      </div>
+      <div class="topbar-right" id="topbar-editor-right" style="display:none;">
+        <a id="editor-preview" href="#" target="_blank" class="btn btn-ghost btn-sm">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> Preview
+        </a>
+        <button type="submit" form="edit-form" class="btn btn-primary btn-sm" id="save-btn">
+          <i class="fa-solid fa-floppy-disk"></i> Simpan
+        </button>
+      </div>
+    </header>
+
+    <div class="admin-content">
+
+      <!-- Dashboard -->
+      <div id="view-dashboard">
+        <div class="dash-stats">
+          <div class="stat-card" onclick="switchView('products')">
+            <div class="stat-icon"><i class="fa-solid fa-robot"></i></div>
+            <div class="stat-num" id="ds-products">—</div>
+            <div class="stat-label">Produk</div>
+          </div>
+          <div class="stat-card" onclick="switchView('pelatihan')">
+            <div class="stat-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <div class="stat-num" id="ds-pelatihan">—</div>
+            <div class="stat-label">Program Pelatihan</div>
+          </div>
+          <div class="stat-card" onclick="switchView('blog')">
+            <div class="stat-icon"><i class="fa-solid fa-trophy"></i></div>
+            <div class="stat-num" id="ds-blog">—</div>
+            <div class="stat-label">Pencapaian</div>
+          </div>
+          <div class="stat-card" onclick="switchView('events')">
+            <div class="stat-icon"><i class="fa-solid fa-calendar-days"></i></div>
+            <div class="stat-num" id="ds-events">—</div>
+            <div class="stat-label">Events</div>
+          </div>
+        </div>
+
+        <div class="dash-section-label">Aksi Cepat</div>
+        <div class="dash-quick">
+          <a href="index.html" target="_blank" class="btn btn-ghost btn-sm"><i class="fa-solid fa-house-chimney"></i> Homepage</a>
+          <a href="products.html" target="_blank" class="btn btn-ghost btn-sm"><i class="fa-solid fa-robot"></i> Halaman Produk</a>
+          <a href="pelatihan.html" target="_blank" class="btn btn-ghost btn-sm"><i class="fa-solid fa-graduation-cap"></i> Halaman Pelatihan</a>
+          <a href="events.html" target="_blank" class="btn btn-ghost btn-sm"><i class="fa-solid fa-calendar-days"></i> Halaman Events</a>
+          <a href="achievements.html" target="_blank" class="btn btn-ghost btn-sm"><i class="fa-solid fa-trophy"></i> Halaman Pencapaian</a>
+        </div>
+      </div>
+
+      <!-- Content List -->
+      <div id="view-list" style="display:none;">
+        <div class="list-header">
+          <span class="list-count" id="list-count"></span>
+        </div>
+        <div class="content-grid" id="content-grid">
+          <div class="loader"><div class="spinner"></div> Memuat...</div>
+        </div>
+      </div>
+
+      <!-- Full-page Editor -->
+      <div id="view-editor" style="display:none;">
+        <form id="edit-form" autocomplete="off">
+          <input type="hidden" id="f-file">
+          <input type="hidden" id="f-type">
+
+          <div class="editor-layout">
+
+            <!-- Main column -->
+            <div class="editor-main">
+
+              <!-- Informasi Utama (always shown) -->
+              <div class="editor-card">
+                <div class="editor-card-title">Informasi Utama</div>
+                <div class="fg">
+                  <label class="flabel">Judul</label>
+                  <input type="text" class="fc" id="f-title" required>
+                </div>
+              </div>
+
+              <!-- Produk / Pelatihan -->
+              <div id="pf" style="display:none;">
+                <div class="editor-card" style="margin-bottom:16px;">
+                  <div class="editor-card-title">Harga</div>
+                  <div class="frow">
+                    <div class="fg">
+                      <label class="flabel">Harga Jual</label>
+                      <input type="text" class="fc" id="f-price" placeholder="Rp 0">
+                    </div>
+                    <div class="fg">
+                      <label class="flabel">Harga Coret</label>
+                      <input type="text" class="fc" id="f-price-coret" placeholder="Rp 0">
+                    </div>
+                  </div>
+                </div>
+                <div class="editor-card" style="margin-bottom:16px;">
+                  <div class="editor-card-title">Deskripsi</div>
+                  <div class="fg">
+                    <textarea class="fc" id="f-desc" rows="4" placeholder="Tulis deskripsi produk..."></textarea>
+                  </div>
+                  <div class="fg">
+                    <label class="flabel">Teks WhatsApp Pre-fill</label>
+                    <input type="text" class="fc" id="f-wa" placeholder="Halo Ichibot, saya ingin memesan...">
+                    <div class="fhint">Teks otomatis saat pengguna klik tombol "Pesan Sekarang"</div>
+                  </div>
+                </div>
+                <div class="editor-card">
+                  <div class="editor-card-title">Spesifikasi</div>
+                  <div class="frow">
+                    <div class="fg">
+                      <label class="flabel">Kolom Kiri</label>
+                      <textarea class="fc" id="f-specs1" rows="9" placeholder="Satu spek per baris&#10;Arduino Nano&#10;8 Sensor Optik&#10;..."></textarea>
+                    </div>
+                    <div class="fg">
+                      <label class="flabel">Kolom Kanan</label>
+                      <textarea class="fc" id="f-specs2" rows="9" placeholder="Satu spek per baris&#10;Motor DC 500RPM&#10;WiFi + BT&#10;..."></textarea>
+                    </div>
+                  </div>
+                  <div class="fhint">Pisahkan setiap spesifikasi dengan Enter (baris baru)</div>
+                </div>
+              </div>
+
+              <!-- Blog / Pencapaian -->
+              <div id="bf" style="display:none;">
+                <div class="editor-card">
+                  <div class="editor-card-title">Artikel</div>
+                  <div class="fg">
+                    <label class="flabel">Badge / Kategori</label>
+                    <input type="text" class="fc" id="f-badge" placeholder="#KemenanganLomba">
+                  </div>
+                  <div class="fg">
+                    <label class="flabel">Isi Konten</label>
+                    <div id="f-content-editor"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Events -->
+              <div id="ef" style="display:none;">
+                <div class="editor-card" style="margin-bottom:16px;">
+                  <div class="editor-card-title">Detail Event</div>
+                  <div class="fg">
+                    <label class="flabel">Badge / Tipe Event</label>
+                    <input type="text" class="fc" id="f-ev-badge" placeholder="Kompetisi Nasional">
+                  </div>
+                  <div class="fg">
+                    <label class="flabel">Deskripsi Singkat</label>
+                    <textarea class="fc" id="f-ev-desc" rows="3"></textarea>
+                  </div>
+                </div>
+                <div class="editor-card">
+                  <div class="editor-card-title">Info & Detail</div>
+                  <div class="frow">
+                    <div class="fg">
+                      <label class="flabel">Kolom Kiri</label>
+                      <textarea class="fc" id="f-ev-s1" rows="8" placeholder="Satu info per baris"></textarea>
+                    </div>
+                    <div class="fg">
+                      <label class="flabel">Kolom Kanan</label>
+                      <textarea class="fc" id="f-ev-s2" rows="8" placeholder="Satu info per baris"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Side column: image -->
+            <div class="editor-side">
+              <div class="editor-card">
+                <div class="editor-card-title">Gambar</div>
+                <div class="fg">
+                  <label class="flabel">URL Gambar</label>
+                  <input type="text" class="fc" id="f-image" placeholder="https://...">
+                </div>
+                <div class="img-preview" id="img-preview">
+                  <img id="preview-img" alt="Preview">
+                  <span class="img-preview-placeholder" id="img-placeholder">
+                    <i class="fa-regular fa-image" style="display:block;font-size:1.5rem;margin-bottom:6px;"></i>
+                    Preview gambar
+                  </span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ═══ Create Modal ══════════════════════════════════ -->
+  <div class="modal-bg" id="create-modal">
+    <div class="modal-box">
+      <div class="modal-title"><i class="fa-solid fa-file-circle-plus" style="color:var(--red);margin-right:8px;font-size:0.95rem;"></i>Tambah Halaman Baru</div>
+      <form id="create-form" autocomplete="off">
+        <input type="hidden" id="cm-cat">
+        <div class="fg">
+          <label class="flabel">Kategori</label>
+          <input class="fc" id="cm-cat-label" readonly style="opacity:0.45;cursor:default;">
+        </div>
+        <div class="fg">
+          <label class="flabel">Nama File</label>
+          <div style="display:flex;">
+            <span class="fc" style="width:auto;flex-shrink:0;border-right:none;border-radius:var(--r) 0 0 var(--r);background:rgba(255,255,255,0.02);color:var(--text-3);white-space:nowrap;pointer-events:none;" id="cm-prefix"></span>
+            <input type="text" class="fc" id="cm-slug" placeholder="nama-baru" required style="border-radius:0 var(--r) var(--r) 0;">
+          </div>
+          <div class="fhint">Huruf kecil + tanda hubung. Ekstensi .html otomatis ditambahkan.</div>
+        </div>
+        <div class="fg">
+          <label class="flabel">Judul Halaman</label>
+          <input type="text" class="fc" id="cm-title" required placeholder="Nama produk / program / event">
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost btn-sm" onclick="closeCreateModal()">Batal</button>
+          <button type="submit" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Buat Halaman</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ═══ Confirm Modal ════════════════════════════════ -->
+  <div class="modal-bg" id="confirm-modal">
+    <div class="modal-box confirm-box">
+      <div class="modal-title" id="confirm-title">Konfirmasi</div>
+      <p class="confirm-text" id="confirm-text"></p>
+      <div class="modal-actions">
+        <button class="btn btn-ghost btn-sm" onclick="closeConfirm()">Batal</button>
+        <button class="btn btn-danger btn-sm" id="confirm-ok">
+          <i class="fa-solid fa-trash"></i> Hapus
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Toasts ════════════════════════════════════════ -->
+  <div class="toasts" id="toasts"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/quill@2/dist/quill.js"></script>
+  <script>
+  (function () {
+    'use strict';
+
+    /* ── Config & state ─────────────────────────────── */
+    const API = 'http://localhost:3000';
+    let allPages  = {};
+    let curView   = 'dashboard';
+    let prevView  = 'dashboard';
+    let confirmCb = null;
+
+    const TITLES  = { dashboard:'Dashboard', products:'Produk', pelatihan:'Pelatihan', blog:'Pencapaian', events:'Events' };
+    const LABELS  = { products:'produk', pelatihan:'program pelatihan', blog:'pencapaian', events:'event' };
+    const ICONS   = { products:'robot', pelatihan:'graduation-cap', blog:'trophy', events:'calendar-days' };
+    const PFXS    = { products:'product-', pelatihan:'pelatihan-', blog:'achievement-', events:'event-' };
+    const CATNAME = { products:'Produk', pelatihan:'Pelatihan', blog:'Pencapaian', events:'Event' };
+
+    /* ── Refs ───────────────────────────────────────── */
+    const $ = id => document.getElementById(id);
+
+    /* ── Quill ──────────────────────────────────────── */
+    let quill = null;
+
+    function initQuill() {
+      if (quill) return;
+      quill = new Quill('#f-content-editor', {
+        theme: 'snow',
+        placeholder: 'Tulis konten artikel di sini…',
+        modules: {
+          toolbar: [
+            [{ heading: [2, 3, 4, false] }],
+            ['bold', 'italic', 'underline'],
+            [{ list: 'ordered' }, { list: 'bullet' }],
+            ['link'],
+            ['clean'],
+          ],
+        },
+      });
+    }
+
+    /* ── Boot ───────────────────────────────────────── */
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchPages();
+      document.querySelectorAll('.nav-btn[data-view]').forEach(b =>
+        b.addEventListener('click', () => switchView(b.dataset.view))
+      );
+      $('refresh-btn').addEventListener('click', () => { fetchPages(); toast('Data diperbarui.'); });
+      $('add-btn').addEventListener('click', openCreateModal);
+      $('back-btn').addEventListener('click', closeEditor);
+      $('f-image').addEventListener('input', e => updatePreview(e.target.value));
+      $('edit-form').addEventListener('submit', handleSave);
+      $('create-form').addEventListener('submit', handleCreate);
+      $('confirm-ok').addEventListener('click', () => { confirmCb && confirmCb(); closeConfirm(); });
+    });
+
+    /* ── Fetch ──────────────────────────────────────── */
+    function fetchPages() {
+      fetch(`${API}/api/pages`)
+        .then(r => r.json())
+        .then(data => {
+          allPages = data;
+          refreshCounts();
+          if (curView !== 'dashboard' && curView !== 'editor') renderList(curView);
+        })
+        .catch(() => toast('Gagal menghubungi server. Pastikan admin.js berjalan.', 'error'));
+    }
+
+    function refreshCounts() {
+      ['products','pelatihan','blog','events'].forEach(cat => {
+        const n = (allPages[cat] || []).length;
+        $(`count-${cat}`).textContent = n;
+        $(`ds-${cat}`) && ($(`ds-${cat}`).textContent = n);
+      });
+    }
+
+    /* ── Navigation ─────────────────────────────────── */
+    window.switchView = function (view) {
+      const isEditor = view === 'editor';
+
+      // Sidebar active state (don't change in editor mode)
+      if (!isEditor) {
+        curView = view;
+        document.querySelectorAll('.nav-btn[data-view]').forEach(b =>
+          b.classList.toggle('active', b.dataset.view === view)
+        );
+      }
+
+      // Topbar
+      $('topbar-default-left').style.display  = isEditor ? 'none' : '';
+      $('topbar-default-right').style.display = isEditor ? 'none' : '';
+      $('topbar-editor-left').style.display   = isEditor ? '' : 'none';
+      $('topbar-editor-right').style.display  = isEditor ? '' : 'none';
+
+      if (!isEditor) {
+        $('page-title').textContent = TITLES[view] || view;
+        $('add-btn').style.display  = view === 'dashboard' ? 'none' : '';
+      }
+
+      // Content views
+      $('view-dashboard').style.display = (!isEditor && view === 'dashboard') ? '' : 'none';
+      $('view-list').style.display      = (!isEditor && view !== 'dashboard') ? '' : 'none';
+      $('view-editor').style.display    = isEditor ? '' : 'none';
+
+      if (!isEditor && view !== 'dashboard') renderList(view);
+    };
+
+    /* ── Render card grid ───────────────────────────── */
+    function renderList(cat) {
+      const files = allPages[cat] || [];
+      $('list-count').textContent = `${files.length} ${LABELS[cat] || 'halaman'}`;
+      const grid = $('content-grid');
+
+      if (!files.length) {
+        grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;">
+          <i class="fa-solid fa-${ICONS[cat]}"></i>
+          <p>Belum ada ${LABELS[cat]}.<br>Klik "Tambah" untuk memulai.</p>
+        </div>`;
+        return;
+      }
+
+      grid.innerHTML = files.map(f => `
+        <div class="c-card" id="cc-${CSS.escape(f)}">
+          <div class="c-card-thumb">
+            <img src="https://placehold.co/400x225/111/222?text=..." alt="${f}" loading="lazy">
+          </div>
+          <div class="c-card-body">
+            <div class="c-card-title">${prettify(f)}</div>
+            <div class="c-card-file">${f}</div>
+            <div class="c-card-actions">
+              <button class="btn btn-ghost btn-sm" onclick="openEdit('${f}')">
+                <i class="fa-solid fa-pen-to-square"></i> Edit
+              </button>
+              <a href="${f}" target="_blank" class="btn btn-ghost btn-sm btn-icon" title="Preview">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+              <button class="btn btn-danger btn-sm btn-icon" onclick="askDelete('${f}')" title="Hapus">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      files.forEach(loadCardMeta);
+    }
+
+    function prettify(f) {
+      return f.replace('.html','')
+              .replace(/^(product|pelatihan|achievement|event)-/,'')
+              .split('-').map(w => w[0].toUpperCase()+w.slice(1)).join(' ');
+    }
+
+    function loadCardMeta(file) {
+      fetch(`${API}/api/page?file=${file}`)
+        .then(r => r.json())
+        .then(d => {
+          const card = document.getElementById(`cc-${CSS.escape(file)}`);
+          if (!card) return;
+          if (d.title) card.querySelector('.c-card-title').textContent = d.title;
+          if (d.image) card.querySelector('.c-card-thumb img').src = d.image;
+        }).catch(() => {});
+    }
+
+    /* ── Editor ─────────────────────────────────────── */
+    window.openEdit = function (file) {
+      prevView = curView;
+
+      $('editor-breadcrumb').textContent = 'Memuat…';
+      $('editor-preview').href = file;
+
+      fetch(`${API}/api/page?file=${file}`)
+        .then(r => r.json())
+        .then(d => {
+          fillForm(d);
+          $('editor-breadcrumb').textContent = `${CATNAME[prevView] || prevView} / ${d.title || d.file}`;
+          switchView('editor');
+          // Scroll to top of content area
+          document.querySelector('.admin-content').scrollTop = 0;
+        })
+        .catch(() => toast('Gagal memuat data halaman.', 'error'));
+    };
+
+    function fillForm(d) {
+      $('f-file').value  = d.file;
+      $('f-type').value  = d.type;
+      $('f-title').value = d.title || '';
+      $('f-image').value = d.image || '';
+      updatePreview(d.image);
+
+      ['pf','bf','ef'].forEach(id => $(id).style.display = 'none');
+
+      if (d.type === 'products' || d.type === 'pelatihan') {
+        $('pf').style.display   = '';
+        $('f-price').value      = d.price || '';
+        $('f-price-coret').value= d.price_coret || '';
+        $('f-desc').value       = d.description || '';
+        $('f-wa').value         = d.whatsapp_text || '';
+        $('f-specs1').value     = (d.specs1 || []).join('\n');
+        $('f-specs2').value     = (d.specs2 || []).join('\n');
+      } else if (d.type === 'blog') {
+        $('bf').style.display = '';
+        $('f-badge').value = d.badge || '';
+        initQuill();
+        if (quill) quill.root.innerHTML = d.content || '';
+      } else if (d.type === 'events') {
+        $('ef').style.display   = '';
+        $('f-ev-badge').value   = d.badge || '';
+        $('f-ev-desc').value    = d.description || '';
+        $('f-ev-s1').value      = (d.specs1 || []).join('\n');
+        $('f-ev-s2').value      = (d.specs2 || []).join('\n');
+      }
+    }
+
+    function updatePreview(url) {
+      const img = $('preview-img');
+      const ph  = $('img-placeholder');
+      if (url && url.startsWith('http')) {
+        img.src = url; img.style.display = '';
+        ph.style.display = 'none';
+      } else {
+        img.style.display = 'none';
+        ph.style.display  = '';
+      }
+    }
+
+    function closeEditor() {
+      switchView(prevView);
+    }
+
+    /* ── Save ───────────────────────────────────────── */
+    function handleSave(e) {
+      e.preventDefault();
+      const type = $('f-type').value;
+      const payload = {
+        file: $('f-file').value, type,
+        title: $('f-title').value,
+        image: $('f-image').value,
+      };
+
+      if (type === 'products' || type === 'pelatihan') {
+        Object.assign(payload, {
+          price:        $('f-price').value,
+          price_coret:  $('f-price-coret').value,
+          description:  $('f-desc').value,
+          whatsapp_text:$('f-wa').value,
+          specs1: $('f-specs1').value.split('\n').filter(s => s.trim()),
+          specs2: $('f-specs2').value.split('\n').filter(s => s.trim()),
         });
+      } else if (type === 'blog') {
+        payload.badge   = $('f-badge').value;
+        payload.content = quill ? quill.root.innerHTML : '';
+      } else if (type === 'events') {
+        Object.assign(payload, {
+          badge:       $('f-ev-badge').value,
+          description: $('f-ev-desc').value,
+          specs1: $('f-ev-s1').value.split('\n').filter(s => s.trim()),
+          specs2: $('f-ev-s2').value.split('\n').filter(s => s.trim()),
+        });
+      }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            createModal = new bootstrap.Modal(document.getElementById('createModal'));
+      const btn = $('save-btn');
+      btn.disabled = true;
+      btn.innerHTML = '<div class="spinner" style="width:13px;height:13px;border-width:2px;"></div> Menyimpan…';
+
+      fetch(`${API}/api/page`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+        .then(r => r.json())
+        .then(d => {
+          if (d.success) {
+            toast('Perubahan berhasil disimpan!', 'success');
+            closeEditor();
             fetchPages();
+          } else toast('Gagal: ' + (d.error || ''), 'error');
+        })
+        .catch(() => toast('Gagal menghubungi server.', 'error'))
+        .finally(() => {
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Simpan';
         });
+    }
 
-        function fetchPages() {
-            fetch('http://localhost:3000/api/pages')
-                .then(res => res.json())
-                .then(data => {
-                    allPages = data;
-                    loadFiles(currentCategory);
-                });
-        }
+    /* ── Delete ─────────────────────────────────────── */
+    window.askDelete = function (file) {
+      $('confirm-title').textContent = 'Hapus Halaman';
+      $('confirm-text').textContent  = `Yakin ingin menghapus "${file}"? Kartu di halaman listing juga akan dihapus. Tindakan ini tidak bisa dibatalkan.`;
+      confirmCb = () => doDelete(file);
+      $('confirm-modal').classList.add('show');
+    };
 
-        function loadFiles(category) {
-            currentCategory = category;
-            document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
-            event && event.target && event.target.classList && event.target.classList.add('active');
+    function doDelete(file) {
+      fetch(`${API}/api/delete`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ category: curView, file }),
+      })
+        .then(r => r.json())
+        .then(d => {
+          if (d.success) { toast(`"${file}" dihapus.`, 'success'); fetchPages(); }
+          else toast('Gagal hapus: ' + (d.error || ''), 'error');
+        })
+        .catch(() => toast('Gagal menghubungi server.', 'error'));
+    }
 
-            const list = document.getElementById('file-list');
-            list.innerHTML = '';
-            
-            if (!allPages[category]) return;
+    window.closeConfirm = function () {
+      $('confirm-modal').classList.remove('show');
+      confirmCb = null;
+    };
 
-            allPages[category].forEach(file => {
-                const item = document.createElement('div');
-                item.className = 'list-group-item list-group-item-action';
-                
-                const span = document.createElement('span');
-                span.textContent = file;
-                span.style.flex = "1";
-                span.onclick = () => {
-                    document.querySelectorAll('.list-group-item').forEach(el => el.classList.remove('active'));
-                    item.classList.add('active');
-                    loadFileDetails(file);
-                };
-                
-                const delBtn = document.createElement('button');
-                delBtn.innerHTML = '&times;';
-                delBtn.className = 'btn-delete';
-                delBtn.title = 'Hapus File';
-                delBtn.onclick = (e) => {
-                    e.stopPropagation();
-                    if(confirm(`Yakin ingin menghapus ${file} beserta tautannya di halaman index?`)) {
-                        deleteFile(file);
-                    }
-                };
+    /* ── Create ─────────────────────────────────────── */
+    function openCreateModal() {
+      $('cm-cat').value      = curView;
+      $('cm-cat-label').value= CATNAME[curView] || curView;
+      $('cm-prefix').textContent = PFXS[curView] || '';
+      $('cm-slug').value  = '';
+      $('cm-title').value = '';
+      $('create-modal').classList.add('show');
+    }
 
-                item.appendChild(span);
-                item.appendChild(delBtn);
-                list.appendChild(item);
-            });
-        }
+    window.closeCreateModal = function () {
+      $('create-modal').classList.remove('show');
+    };
 
-        function openCreateModal() {
-            document.getElementById('create-category').value = currentCategory;
-            let prefix = '';
-            if(currentCategory === 'products') prefix = 'product-';
-            if(currentCategory === 'pelatihan') prefix = 'pelatihan-';
-            if(currentCategory === 'blog') prefix = 'achievement-';
-            if(currentCategory === 'events') prefix = 'event-';
-            document.getElementById('file-prefix').textContent = prefix;
-            document.getElementById('create-filename').value = '';
-            document.getElementById('create-title').value = '';
-            createModal.show();
-        }
+    function handleCreate(e) {
+      e.preventDefault();
+      const pfx  = $('cm-prefix').textContent;
+      let   name = pfx + $('cm-slug').value.trim();
+      if (!name.endsWith('.html')) name += '.html';
 
-        document.getElementById('create-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const prefix = document.getElementById('file-prefix').textContent;
-            let filename = prefix + document.getElementById('create-filename').value;
-            if(!filename.endsWith('.html')) filename += '.html';
-            
-            const payload = {
-                category: currentCategory,
-                filename: filename,
-                title: document.getElementById('create-title').value
-            };
+      fetch(`${API}/api/create`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ category: $('cm-cat').value, filename: name, title: $('cm-title').value }),
+      })
+        .then(r => r.json())
+        .then(d => {
+          if (d.success) { toast(`"${name}" berhasil dibuat!`, 'success'); closeCreateModal(); fetchPages(); }
+          else toast('Gagal: ' + (d.error || ''), 'error');
+        })
+        .catch(() => toast('Gagal menghubungi server.', 'error'));
+    }
 
-            fetch('http://localhost:3000/api/create', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            }).then(res => res.json()).then(data => {
-                if(data.success) {
-                    createModal.hide();
-                    fetchPages(); // reload lists
-                } else {
-                    alert(data.error);
-                }
-            });
-        });
+    /* ── Toast ──────────────────────────────────────── */
+    function toast(msg, type = 'success') {
+      const wrap = $('toasts');
+      const el   = document.createElement('div');
+      el.className = `toast ${type}`;
+      el.innerHTML = `<i class="fa-solid fa-${type === 'success' ? 'circle-check' : 'circle-xmark'}"></i>${msg}`;
+      wrap.appendChild(el);
+      setTimeout(() => {
+        el.style.opacity = '0'; el.style.transform = 'translateX(16px)';
+        setTimeout(() => el.remove(), 280);
+      }, 3200);
+    }
 
-        function deleteFile(file) {
-            fetch('http://localhost:3000/api/delete', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ category: currentCategory, file: file })
-            }).then(res => res.json()).then(data => {
-                if(data.success) {
-                    document.getElementById('editor-container').style.display = 'none';
-                    document.getElementById('editor-title').textContent = 'Pilih halaman untuk diedit';
-                    fetchPages();
-                }
-            });
-        }
-
-        function loadFileDetails(file) {
-            fetch(`http://localhost:3000/api/page?file=${file}`)
-                .then(res => res.json())
-                .then(data => {
-                    document.getElementById('editor-container').style.display = 'block';
-                    document.getElementById('editor-title').textContent = `Editing: ${file}`;
-                    document.getElementById('alert-msg').innerHTML = '';
-                    
-                    document.getElementById('file-name').value = data.file;
-                    document.getElementById('page-type').value = data.type;
-                    document.getElementById('title').value = data.title || '';
-                    document.getElementById('image').value = data.image || '';
-
-                    if (data.type === 'products' || data.type === 'pelatihan' || data.type === 'events') {
-                        document.getElementById('product-fields').style.display = 'block';
-                        document.getElementById('blog-fields').style.display = 'none';
-                        
-                        document.getElementById('price').value = data.price || '';
-                        document.getElementById('price_coret').value = data.price_coret || '';
-                        document.getElementById('description').value = data.description || '';
-                        document.getElementById('whatsapp_text').value = data.whatsapp_text || '';
-                        
-                        document.getElementById('specs1').value = (data.specs1 || []).join('\\n');
-                        document.getElementById('specs2').value = (data.specs2 || []).join('\\n');
-                        
-                        if(data.type === 'events') {
-                            document.getElementById('blog-fields').style.display = 'block';
-                            document.getElementById('badge').value = data.badge || '';
-                            tinymce.get('blog-content').editorContainer.style.display = 'none';
-                        } else {
-                            if(tinymce.get('blog-content')) tinymce.get('blog-content').editorContainer.style.display = 'block';
-                        }
-                    } else if (data.type === 'blog') {
-                        document.getElementById('product-fields').style.display = 'none';
-                        document.getElementById('blog-fields').style.display = 'block';
-                        if(tinymce.get('blog-content')) tinymce.get('blog-content').editorContainer.style.display = 'block';
-                        
-                        document.getElementById('badge').value = data.badge || '';
-                        tinymce.get('blog-content').setContent(data.content || '');
-                    }
-                });
-        }
-
-        document.getElementById('edit-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const payload = {
-                file: document.getElementById('file-name').value,
-                type: document.getElementById('page-type').value,
-                title: document.getElementById('title').value,
-                image: document.getElementById('image').value
-            };
-
-            if (payload.type === 'products' || payload.type === 'pelatihan' || payload.type === 'events') {
-                payload.price = document.getElementById('price').value;
-                payload.price_coret = document.getElementById('price_coret').value;
-                payload.description = document.getElementById('description').value;
-                payload.whatsapp_text = document.getElementById('whatsapp_text').value;
-                payload.specs1 = document.getElementById('specs1').value.split('\\n').filter(s => s.trim());
-                payload.specs2 = document.getElementById('specs2').value.split('\\n').filter(s => s.trim());
-                if(payload.type === 'events') payload.badge = document.getElementById('badge').value;
-            } else if (payload.type === 'blog') {
-                payload.badge = document.getElementById('badge').value;
-                payload.content = tinymce.get('blog-content').getContent();
-            }
-
-            fetch('http://localhost:3000/api/page', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            }).then(res => res.json()).then(data => {
-                if (data.success) {
-                    const alert = document.createElement('div');
-                    alert.className = 'alert alert-success';
-                    alert.textContent = 'Perubahan berhasil disimpan! Halaman Index juga telah diperbarui.';
-                    document.getElementById('alert-msg').innerHTML = '';
-                    document.getElementById('alert-msg').appendChild(alert);
-                    setTimeout(() => alert.remove(), 3000);
-                }
-            });
-        });
-    </script>
+  })();
+  </script>
 </body>
 </html>
